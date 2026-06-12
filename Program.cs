@@ -7,14 +7,15 @@ namespace HomeWork_9_10
     {
         static void Main(string[] args)
         {
-            int[] numbers = { 10, 25, 3, 48, 7, 99, 56, 2 };
+            int[] arr= { 5, 3, 8, 3, 9, 5, 1, 8, 2 };
+            
+            int[] result = arr.OrderBy(i=>i).ToArray();
 
-            var filteredResult = numbers.Where(n => n > 20 && n <60);
-
-            foreach (var num in filteredResult)
+            foreach(var item in result)
             {
-                Console.WriteLine(num);
+                Console.Write(item + " ");
             }
+            Console.WriteLine();
         }
     }
 }
