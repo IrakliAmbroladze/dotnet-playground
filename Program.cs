@@ -7,15 +7,25 @@ namespace HomeWork_9_10
     {
         static void Main(string[] args)
         {
-            int[] arr= { 5, 3, 8, 3, 9, 5, 1, 8, 2 };
-            
-            int[] result = arr.Distinct().OrderBy(i=>i).ToArray();
+            int[] arr = {33, 71, 5, 88, 42, 19, 65 };
+            int resultFirst = Array.Find(arr, x => x > 40);
+            int resultLast = Array.FindLast(arr, x => x > 40);
+            int[] resultAll = Array.FindAll(arr, x => x > 40);
 
-            foreach(var item in result)
-            {
-                Console.Write(item + " ");
-            }
+            Console.WriteLine($"First x > 40: {resultFirst}");
             Console.WriteLine();
+            Console.WriteLine($"Last x > 40: {resultLast}");
+            Console.WriteLine();
+            Console.WriteLine("All x > 40:");
+
+            foreach (int num in resultAll)
+            {
+                Console.Write(num + " ");
+            }
+
+            Console.WriteLine();
+
+
         }
     }
 }
