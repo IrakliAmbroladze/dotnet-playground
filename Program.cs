@@ -7,18 +7,24 @@ namespace HomeWork_9_10
     {
         static void Main(string[] args)
         {
-            int num1 = 5;
-            int num2 = 7;
-
-
-            int result = Multiply(num1, num2);
-
-            Console.WriteLine($"{num1} * {num2} = {result}");
+            Console.WriteLine(Sum(2,7));
+            Console.WriteLine(Sum(2.5,7));
+            Console.WriteLine(Sum(2,7,6));
 
         }
 
-        static int Multiply(int a, int b) {
-            return a * b;
+        static int	Sum(int a, int b)
+        {
+            return a + b;
+        } 
+        static double Sum(double a, double b)
+        {
+            return a + b;
         }
+        static int Sum(int a, int b, int c)
+        {
+            return a + b + c;
+        }
+
     }
 }
