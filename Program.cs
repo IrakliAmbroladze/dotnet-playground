@@ -9,7 +9,7 @@ namespace HomeWork_9_10
         {
             int[] arr= { 5, 3, 8, 3, 9, 5, 1, 8, 2 };
             
-            int[] result = arr.OrderBy(i=>i).ToArray();
+            int[] result = arr.Distinct().OrderBy(i=>i).ToArray();
 
             foreach(var item in result)
             {
