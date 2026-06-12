@@ -4,26 +4,30 @@
     {
         static void Main(string[] args)
         {
-            Console.Write("Please enter a phrase: ");
-            string input = Console.ReadLine();  
-            CountCharacters(input);
+            int ourNumberOne = 10;
+            int ourNumberTwo = 20;
+
+            int indexOne, indexTwo;
+
+            indexOne = FindIndex(ourNumberOne);
+            indexTwo = FindIndex(ourNumberTwo);
+
+            Console.WriteLine($"Index for the {ourNumberOne} is: {indexOne}");
+            Console.WriteLine($"Index for the {ourNumberTwo} is: {indexTwo}");
         }
 
-        static void CountCharacters(string input)
+        static int FindIndex(int query)
         {
-            int count = 0;
-            foreach (char c in input)
+            int[] testArr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            for (int i = 0; i < testArr.Length; i++)
             {
-                if (c == ' ')
+                if (testArr[i] == query)
                 {
-                    continue;
-                }
-                else
-                {
-                    count++;
+                    return i;
                 }
             }
-            Console.WriteLine($"The number of characters: {count}");
+            return -1;
         }
     }
 }
