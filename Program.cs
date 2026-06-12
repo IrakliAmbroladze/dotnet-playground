@@ -1,33 +1,20 @@
-﻿namespace HomeWork_9_10
+﻿using System;
+using System.Linq;
+
+namespace HomeWork_9_10
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int ourNumberOne = 10;
-            int ourNumberTwo = 20;
+            int[] numbers = { 10, 25, 3, 48, 7, 99, 56, 2 };
 
-            int indexOne, indexTwo;
+            var filteredResult = numbers.Where(n => n > 20 && n <60);
 
-            indexOne = FindIndex(ourNumberOne);
-            indexTwo = FindIndex(ourNumberTwo);
-
-            Console.WriteLine($"Index for the {ourNumberOne} is: {indexOne}");
-            Console.WriteLine($"Index for the {ourNumberTwo} is: {indexTwo}");
-        }
-
-        static int FindIndex(int query)
-        {
-            int[] testArr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
-            for (int i = 0; i < testArr.Length; i++)
+            foreach (var num in filteredResult)
             {
-                if (testArr[i] == query)
-                {
-                    return i;
-                }
+                Console.WriteLine(num);
             }
-            return -1;
         }
     }
 }
