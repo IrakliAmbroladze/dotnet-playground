@@ -5,24 +5,24 @@ namespace HomeWork_9_10
 {
     internal class Program
     {
+
+       
+      
         static void Main(string[] args)
         {
             int number = 5;
-            Console.WriteLine($"{number} is even: ");
-            Console.WriteLine(IsEven(number));
-            Console.WriteLine();
+            int result = Factorial(number);
 
-            int number2 = 10;
-            Console.WriteLine($"{number2} is even: ");
-            Console.WriteLine(IsEven(number2));
-            Console.WriteLine();
-
+            Console.WriteLine($"Factorial of {number} is {result}");
         }
 
-        static bool IsEven(int number)
+        static int Factorial(int number)
         {
-            return number % 2 == 0;
+            for (int i = number - 1; i > 0; i--)
+            {
+                number *= i;
+            }
+            return number;
         }
-
     }
 }
