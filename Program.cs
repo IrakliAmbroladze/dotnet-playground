@@ -1,38 +1,26 @@
-﻿namespace HomeWork
+﻿namespace HomeWork_9_10
 {
     internal class Program
     {
 
+
+
         static void Main(string[] args)
         {
-            Console.WriteLine(SumAll(1, 2, 3));
-            Console.WriteLine();
-            Console.WriteLine(SumAll(5, 10));
-            Console.WriteLine();
-            Console.WriteLine(SumAll());
-            Console.WriteLine();
-            Console.WriteLine(SumAll(new int[] { 4, 8, 15 }));
-            Console.WriteLine();
+            int number = 8;
+            int result = Factorial(number);
+
+            Console.WriteLine($"Factorial of {number} is {result}");
+            Console.WriteLine($"Factorial of 0 is {Factorial(0)}");
+            Console.WriteLine($"Factorial of 1 is {Factorial(1)}");
         }
 
-        static int SumAll(params int[] numbers)
+        static int Factorial(int number)
         {
-            int sum = 0;
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                sum += numbers[i];
-            }
-            double avg;
-            if (numbers.Length > 0)
-            {
-                avg = sum / numbers.Length;
-                Console.WriteLine($"average is: {avg}");
-            }
+            if (number == 0 || number == 1)
+                return 1;
 
-            return sum;
+            return number * Factorial(number - 1);
         }
-
     }
-
 }
-
