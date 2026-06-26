@@ -2,21 +2,18 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            int[] arr = { 1, 2, 3, 4, 5 };
-
-            PrintArray(arr, 0);
+            Console.WriteLine(SumOfDigits(124));
+            Console.WriteLine(SumOfDigits(812));
         }
 
-        static void PrintArray(int[] arr, int index)
+        static int SumOfDigits(int n)
         {
-            if (index >= arr.Length)
-                return;
+            if (n == 0)
+                return 0;
 
-            Console.WriteLine(arr[index]);
-
-            PrintArray(arr, index + 1);
+            return (n % 10) + SumOfDigits(n / 10);
         }
 
     }
