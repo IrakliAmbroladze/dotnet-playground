@@ -9,14 +9,18 @@
 
         static void Main()
         {
-            Season current = Season.Summer;
-            Console.WriteLine(current.ToString());
-            Console.WriteLine((byte)current);
-            Console.WriteLine();
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            foreach (Season season in Enum.GetValues(typeof(Season)))
+            Console.Write("შემოიტანეთ სეზონის სახელი (მაგ. summer, WINTER): ");
+            string input = Console.ReadLine();
+
+            if (Enum.TryParse(input, true, out Season parsedSeason))
             {
-                Console.WriteLine($"{season} = {(byte)season}");
+                Console.WriteLine($"სეზონი ცნობილია: {parsedSeason}");
+            }
+            else
+            {
+                Console.WriteLine("შეცდომა: ასეთი სეზონი არ არსებობს");
             }
         }
 
