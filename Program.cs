@@ -1,28 +1,25 @@
-﻿using System;
-using System.Linq;
-
-namespace HomeWork_9_10
+﻿namespace HomeWork
 {
     internal class Program
     {
 
-       
-      
         static void Main(string[] args)
         {
-            int number = 5;
-            int result = Factorial(number);
-
-            Console.WriteLine($"Factorial of {number} is {result}");
+            int x = 5;
+            int y = 10;
+            Console.WriteLine($"before: x is {x}, y is {y}");
+            Swap(ref x, ref y);
+            Console.WriteLine($"after: x is {x}, y is {y}");
         }
 
-        static int Factorial(int number)
+        static void Swap(ref int x, ref int y)
         {
-            for (int i = number - 1; i > 0; i--)
-            {
-                number *= i;
-            }
-            return number;
+            int temp = x;
+            x = y;
+            y = temp;
         }
+
     }
+
 }
+
