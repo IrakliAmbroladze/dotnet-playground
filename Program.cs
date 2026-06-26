@@ -2,18 +2,22 @@
 {
     internal class Program
     {
-        static void Main()
+        enum Season : byte
         {
-            Console.WriteLine(SumOfDigits(124));
-            Console.WriteLine(SumOfDigits(812));
+            Winter = 1, Spring, Summer, Autumn
         }
 
-        static int SumOfDigits(int n)
+        static void Main()
         {
-            if (n == 0)
-                return 0;
+            Season current = Season.Summer;
+            Console.WriteLine(current.ToString());
+            Console.WriteLine((byte)current);
+            Console.WriteLine();
 
-            return (n % 10) + SumOfDigits(n / 10);
+            foreach (Season season in Enum.GetValues(typeof(Season)))
+            {
+                Console.WriteLine($"{season} = {(byte)season}");
+            }
         }
 
     }
