@@ -1,27 +1,19 @@
-﻿using System.Text;
-
-namespace HomeWork
+﻿namespace HomeWork
 {
     internal class Program
     {
 
         static void Main(string[] args)
         {
+            int side = 3;
 
-            Console.InputEncoding = Encoding.UTF8;
-            Console.OutputEncoding = Encoding.UTF8;
+            PrintSquare(in side);
+        }
 
-            Console.Write("შეიყვანეთ რიცხვი: ");
-            string input = Console.ReadLine();
-
-            if (int.TryParse(input, out int result))
-            {
-                Console.WriteLine($"კონვერტაცია წარმატებულია: {result}");
-            }
-            else
-            {
-                Console.WriteLine("შეცდომა: ეს არ არის რიცხვი");
-            }
+        static void PrintSquare(in int number)
+        {
+            number = number + 1;
+            Console.WriteLine(number * number);
         }
 
     }
