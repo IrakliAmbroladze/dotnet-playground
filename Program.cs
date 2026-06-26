@@ -5,15 +5,31 @@
 
         static void Main(string[] args)
         {
-            int side = 3;
-
-            PrintSquare(in side);
+            Console.WriteLine(SumAll(1, 2, 3));
+            Console.WriteLine();
+            Console.WriteLine(SumAll(5, 10));
+            Console.WriteLine();
+            Console.WriteLine(SumAll());
+            Console.WriteLine();
+            Console.WriteLine(SumAll(new int[] { 4, 8, 15 }));
+            Console.WriteLine();
         }
 
-        static void PrintSquare(in int number)
+        static int SumAll(params int[] numbers)
         {
-            number = number + 1;
-            Console.WriteLine(number * number);
+            int sum = 0;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                sum += numbers[i];
+            }
+            double avg;
+            if (numbers.Length > 0)
+            {
+                avg = sum / numbers.Length;
+                Console.WriteLine($"average is: {avg}");
+            }
+
+            return sum;
         }
 
     }
