@@ -4,19 +4,19 @@
     {
         static void Main(string[] args)
         {
-            byte a = 1, b = 8;
-            try
-            {
+            int[] arr = { 1, 2, 3, 4, 5 };
 
-                checked
-                {
-                    Console.WriteLine((byte)(a - b));
-                };
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("We got Overflow exception");
-            }
+            PrintArray(arr, 0);
+        }
+
+        static void PrintArray(int[] arr, int index)
+        {
+            if (index >= arr.Length)
+                return;
+
+            Console.WriteLine(arr[index]);
+
+            PrintArray(arr, index + 1);
         }
 
     }
