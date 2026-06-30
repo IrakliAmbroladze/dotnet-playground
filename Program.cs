@@ -9,7 +9,8 @@ namespace Georgia
         {
             Person person = new Person("Irakli", 35);
 
-            Console.WriteLine(person);
+            Console.WriteLine(person.Name);
+            Console.WriteLine(person.Age);
         }
 
     }
