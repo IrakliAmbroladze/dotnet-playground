@@ -1,4 +1,5 @@
-﻿using static System.Console;
+﻿using PersonLib;
+
 namespace Georgia
 {
     internal class Program
@@ -6,7 +7,9 @@ namespace Georgia
 
         static void Main()
         {
-            WriteLine(107);
+            Person person = new Person("Irakli", 35);
+
+            Console.WriteLine(person);
         }
 
     }
