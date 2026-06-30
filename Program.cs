@@ -1,11 +1,12 @@
-﻿namespace Georgia
+﻿using Printer = System.Console;
+namespace Georgia
 {
     internal class Program
     {
 
         static void Main()
         {
-            System.Console.WriteLine(107);
+            Printer.WriteLine(107);
         }
 
     }
