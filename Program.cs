@@ -2,6 +2,7 @@
 {
     class Point
     {
+        public int z;
         public int x;
         private int y = 12;
 
@@ -25,6 +26,7 @@
             point.x = 45;
             point.PrintX();
             point.PrintY();
+            point.z = 0;
 
         }
 
