@@ -1,13 +1,11 @@
-﻿using PersonLib;
-
-namespace Georgia
+﻿namespace Georgia
 {
     class Point
     {
         public int x;
         private int y;
 
-        private void PrintX()
+        public void PrintX()
         {
             Console.WriteLine(x);
         }
@@ -22,10 +20,11 @@ namespace Georgia
 
         static void Main()
         {
-            Person person = new Person("Irakli", 35);
+            Point point = new Point();
 
-            Console.WriteLine(person.Name);
-            Console.WriteLine(person.Age);
+            point.x = 45;
+            point.PrintX();
+
         }
 
     }
