@@ -3,14 +3,14 @@
     class Point
     {
         public int x;
-        private int y;
+        private int y = 12;
 
         public void PrintX()
         {
             Console.WriteLine(x);
         }
 
-        private void PrintY()
+        public void PrintY()
         {
             Console.WriteLine(y);
         }
@@ -24,6 +24,7 @@
 
             point.x = 45;
             point.PrintX();
+            point.PrintY();
 
         }
 
