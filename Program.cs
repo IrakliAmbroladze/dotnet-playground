@@ -1,4 +1,4 @@
-﻿using Printer = System.Console;
+﻿using static System.Console;
 namespace Georgia
 {
     internal class Program
@@ -6,7 +6,7 @@ namespace Georgia
 
         static void Main()
         {
-            Printer.WriteLine(107);
+            WriteLine(107);
         }
 
     }
