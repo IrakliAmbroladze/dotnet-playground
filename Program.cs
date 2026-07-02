@@ -1,16 +1,14 @@
 ﻿namespace Georgia
 {
-    class Student
+    class Item
     {
-        public string name { get; set; }
-        public int grade { get; set; }
-        public void Study()
+        public string description { get; set; }
+        public int count { get; set; }
+
+        public void PrintDefault()
         {
-            Console.WriteLine($"{this.name} swavlobs");
-        }
-        public Student(string name)
-        {
-            this.name = name;
+            Console.WriteLine(this.count);
+            Console.WriteLine(this.description);
         }
     }
     class Program
@@ -18,9 +16,9 @@
 
         static void Main()
         {
-            Student student = new Student("Irakli");
+            Item item = new Item();
 
-            student.Study();
+            item.PrintDefault();
 
 
         }
