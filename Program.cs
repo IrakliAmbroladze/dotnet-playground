@@ -1,32 +1,27 @@
 ﻿namespace Georgia
 {
-    class Point
+    class Student
     {
-        public int z;
-        public int x;
-        private int y = 12;
-
-        public void PrintX()
+        public string name { get; set; }
+        public int grade { get; set; }
+        public void Study()
         {
-            Console.WriteLine(x);
+            Console.WriteLine($"{this.name} swavlobs");
         }
-
-        public void PrintY()
+        public Student(string name)
         {
-            Console.WriteLine(y);
+            this.name = name;
         }
     }
-    internal class Program
+    class Program
     {
 
         static void Main()
         {
-            Point point = new Point();
+            Student student = new Student("Irakli");
 
-            point.x = 45;
-            point.PrintX();
-            point.PrintY();
-            point.z = 0;
+            student.Study();
+
 
         }
 
