@@ -1,24 +1,15 @@
-﻿using School.Students;
+﻿using PersonLib;
 
-namespace School
+namespace Georgia
 {
-    namespace Students
+    internal class Program
     {
-        public class Student
-        {
-            public string Name;
-        }
-    }
 
-    class Program
-    {
         static void Main()
         {
-
-            Student student = new Student();
-
-            student.Name = "Giga";
-            Console.WriteLine(student.Name);
+            Person person = new Person("Irakli", 35);
+            person.PrintInfo();
         }
+
     }
 }
