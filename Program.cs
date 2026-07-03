@@ -1,28 +1,26 @@
 ﻿namespace University
 {
-    struct Point
+    class Human
     {
-        public int X, Y;
+        public string Name { get; set; }
+        public string Age { get; set; }
+        public string Profession { get; set; }
 
-        public double Distance(Point other)
+        public void Speak()
         {
-            int dx = other.X - X;
-            int dy = other.Y - Y;
-
-            return Math.Sqrt(dx * dx + dy * dy);
+            Console.WriteLine($"{this.Name} is speaking");
+        }
+        public Human(string name)
+        {
+            this.Name = name;
         }
     }
-
     class Program
     {
         static void Main()
         {
-            Point p1 = new Point { X = -1, Y = 3 };
-            Point p2 = new Point { X = 2, Y = 7 };
-
-            double distance = p1.Distance(p2);
-            Console.WriteLine(distance);
-            Console.WriteLine("some text");
+            Human human = new Human("Irakli");
+            human.Speak();
         }
     }
 }
