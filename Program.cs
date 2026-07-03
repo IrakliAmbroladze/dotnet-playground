@@ -1,11 +1,24 @@
-﻿namespace University
+﻿using School.Students;
+
+namespace School
 {
+    namespace Students
+    {
+        public class Student
+        {
+            public string Name;
+        }
+    }
+
     class Program
     {
         static void Main()
         {
-            Person person = new Person { name = "Irakli", age = 20 };
-            person.Talk();
+
+            Student student = new Student();
+
+            student.Name = "Giga";
+            Console.WriteLine(student.Name);
         }
     }
 }
