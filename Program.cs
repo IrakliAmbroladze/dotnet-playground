@@ -4,11 +4,20 @@
     {
         static void Main()
         {
-            Person person = new Person();
-            person.name = "Irakli";
-            person.age = 35;
+            Person person1 = new Person();
+            person1.name = "Irakli";
+            person1.age = 35;
 
-            Console.WriteLine($"{person.name} is {person.age} years old.");
+            Person person2 = new Person();
+            person2.name = "Giga";
+            person2.age = 40;
+
+            person1.Talk();
+            Console.WriteLine();
+
+            person2.Talk();
+            Console.WriteLine();
+
         }
     }
 }
