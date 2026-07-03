@@ -10,7 +10,16 @@
             Console.WriteLine($"Hello I am {this.name} and my age is {this.age}");
         }
 
-        public Person(string name = "Giga", int age = 40)
+        public Person()
+        {
+            this.name = "Someone";
+            this.age = 100;
+        }
+        public Person(string name)
+        {
+            this.name = name;
+        }
+        public Person(string name, int age)
         {
             this.name = name;
             this.age = age;
