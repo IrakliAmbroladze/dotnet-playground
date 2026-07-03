@@ -1,26 +1,26 @@
 ﻿namespace University
 {
-    class Human
+    class Computer
     {
-        public string Name { get; set; }
-        public string Age { get; set; }
-        public string Profession { get; set; }
-
-        public void Speak()
+        public string Brand { get; set; }
+        public string Processor { get; set; }
+        public bool IsOn { get; set; }
+        public void TurnOn()
         {
-            Console.WriteLine($"{this.Name} is speaking");
+            IsOn = true;
+            Console.WriteLine($"{Brand} computer is on.");
         }
-        public Human(string name)
+        public Computer(string name)
         {
-            this.Name = name;
+            this.Brand = name;
         }
     }
     class Program
     {
         static void Main()
         {
-            Human human = new Human("Irakli");
-            human.Speak();
+            Computer dell = new Computer("Dell");
+            dell.TurnOn();
         }
     }
 }
