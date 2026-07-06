@@ -1,33 +1,18 @@
-﻿namespace Georgia
+﻿namespace PersonLib
 {
-    class Car
+    enum Colors : byte
     {
-        private bool isTankFull;
-        private void FillTank()
-        {
-            Console.WriteLine("The tank is being filled ...");
-            isTankFull = true;
-            Console.WriteLine("The tank is filled!");
-
-        }
-        public void Drive()
-        {
-            if (!isTankFull)
-            {
-                Console.WriteLine("The tank is empty ...");
-                FillTank();
-            }
-            Console.WriteLine("Driving ...");
-            isTankFull = false;
-        }
+        Red, Green, Blue, Yellow, Black
     }
     internal class Program
     {
 
         static void Main()
         {
-            Car toyota = new Car();
-            toyota.
+            foreach (Colors color in Enum.GetValues(typeof(Colors)))
+            {
+                Console.WriteLine(color.ToString());
+            }
         }
 
     }
