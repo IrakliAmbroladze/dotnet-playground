@@ -1,31 +1,33 @@
 ﻿namespace Georgia
 {
-    class Point
+    class Car
     {
-        public int X;
-        private int Y = 12;
-
-        private void PrintX()
+        private bool isTankFull;
+        private void FillTank()
         {
-            Console.WriteLine($"X is {X}");
-        }
+            Console.WriteLine("The tank is being filled ...");
+            isTankFull = true;
+            Console.WriteLine("The tank is filled!");
 
-        public void PrintY()
+        }
+        public void Drive()
         {
-            Console.WriteLine($"Y is {Y}");
+            if (!isTankFull)
+            {
+                Console.WriteLine("The tank is empty ...");
+                FillTank();
+            }
+            Console.WriteLine("Driving ...");
+            isTankFull = false;
         }
-
     }
     internal class Program
     {
 
         static void Main()
         {
-            Point p = new Point();
-            p.X = 10;
-            Console.WriteLine($"print {p.X}");
-
-            p.PrintY();
+            Car toyota = new Car();
+            toyota.
         }
 
     }
