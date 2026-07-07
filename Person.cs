@@ -2,6 +2,10 @@
 {
     class Person
     {
+        public static void SayHello()
+        {
+            Console.WriteLine("Hello World!");
+        }
         public string name { get; set; }
         public int age { get; set; }
 
@@ -24,5 +28,10 @@
             this.name = name;
             this.age = age;
         }
+    }
+
+    class Account
+    {
+
     }
 }

@@ -1,17 +1,16 @@
 ﻿namespace PersonLib
 {
-    enum Colors : byte
-    {
-        Red, Green, Blue, Yellow, Black
-    }
+
     internal class Program
     {
 
         static void Main()
         {
-            foreach (Colors color in Enum.GetValues(typeof(Colors)))
+            while (true)
             {
-                Console.WriteLine(color.ToString());
+                var key = Console.ReadKey().Key;
+                Console.WriteLine();
+                Console.WriteLine((int)key);
             }
         }
 
