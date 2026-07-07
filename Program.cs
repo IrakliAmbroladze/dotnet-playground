@@ -6,11 +6,11 @@
 
         static void Main()
         {
-            while (true)
+            int value;
+            int n = int.Parse(Console.ReadLine());
+            for (int i = 1; i <= 10; i++)
             {
-                var key = Console.ReadKey().Key;
-                Console.WriteLine();
-                Console.WriteLine((int)key);
+                Console.WriteLine($"{i} * {n} = {i * n}");
             }
         }
 
