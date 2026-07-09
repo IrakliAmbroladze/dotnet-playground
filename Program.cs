@@ -2,14 +2,44 @@
 {
     internal class Program
     {
+        class Club
+        {
 
+            int age;
+            bool isAllowed;
+
+            public int Age
+            {
+                get { return age; }
+                set { age = value; }
+            }
+            public bool Allowed
+            {
+                get
+                {
+
+                    if (age >= 18 && age < 45)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+                set { isAllowed = value; }
+            }
+        }
         static void Main()
         {
-            const double PI = 3.14;
-            Console.WriteLine("Enter radius: ");
-            double radius = double.Parse(Console.ReadLine());
-            double area = PI * radius * radius;
-            Console.WriteLine($"The area of the circle wirh radius {radius} is {area}");
+            while (true)
+            {
+                Console.WriteLine("Enter age");
+                Club club = new Club();
+                int age = int.Parse(Console.ReadLine());
+                club.Age = age;
+                Console.WriteLine($"is {club.Age} allowed? {club.Allowed}");
+                Console.WriteLine();
+            }
+
         }
     }
 }
