@@ -2,41 +2,26 @@
 {
     internal class Program
     {
-        class Club
+        static class MathHelper
         {
-
-            int age;
-            bool isAllowed;
-
-            public int Age
+            public static int Add(int a, int b)
             {
-                get { return age; }
-                set { age = value; }
+                return a + b;
             }
-            public bool Allowed
+            public static int Multiply(int a, int b)
             {
-                get
-                {
-
-                    if (age >= 18 && age < 45)
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-                set { isAllowed = value; }
+                return a * b;
             }
         }
         static void Main()
         {
             while (true)
             {
-                Console.WriteLine("Enter age");
-                Club club = new Club();
-                int age = int.Parse(Console.ReadLine());
-                club.Age = age;
-                Console.WriteLine($"is {club.Age} allowed? {club.Allowed}");
+                Console.WriteLine("Enter two numbers a and b: ");
+                int a = int.Parse(Console.ReadLine());
+                int b = int.Parse(Console.ReadLine());
+                Console.WriteLine(MathHelper.Add(a, b));
+                Console.WriteLine(MathHelper.Multiply(a, b));
                 Console.WriteLine();
             }
 
