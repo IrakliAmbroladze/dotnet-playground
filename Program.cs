@@ -2,29 +2,42 @@
 {
     internal class Program
     {
-        static class MathHelper
+        class Temperature
         {
-            public static int Add(int a, int b)
+            double celsius;
+            public double Celsius
             {
-                return a + b;
+                get { return celsius; }
+                set
+                {
+                    if (value >= -50 && value < 50)
+                    {
+
+                        celsius = value;
+                    }
+                    else
+                    {
+                        celsius = 0;
+                    }
+
+                }
             }
-            public static int Multiply(int a, int b)
-            {
-                return a * b;
-            }
+        }
+        static double ToFahrenheit(double C)
+        {
+            double F = C * 9 / 5 + 32;
+            return F;
         }
         static void Main()
         {
-            while (true)
+            double C = 100;
+            Temperature temperature = new Temperature() { Celsius = C };
+            if (C != temperature.Celsius)
             {
-                Console.WriteLine("Enter two numbers a and b: ");
-                int a = int.Parse(Console.ReadLine());
-                int b = int.Parse(Console.ReadLine());
-                Console.WriteLine(MathHelper.Add(a, b));
-                Console.WriteLine(MathHelper.Multiply(a, b));
-                Console.WriteLine();
+                Console.WriteLine("Temperature celsius is out of range");
             }
-
+            Console.WriteLine($"Value in celsius is {temperature.Celsius}");
+            Console.WriteLine($"Value in farenheit is {ToFahrenheit(temperature.Celsius)}");
         }
     }
 }
