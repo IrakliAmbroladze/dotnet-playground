@@ -2,42 +2,49 @@
 {
     internal class Program
     {
-        class Temperature
+        class BankAccount
         {
-            double celsius;
-            public double Celsius
+            private decimal balance;
+            public decimal Balance
             {
-                get { return celsius; }
+                get { return balance; }
                 set
                 {
-                    if (value >= -50 && value < 50)
+                    if (value >= 0)
                     {
-
-                        celsius = value;
+                        balance = value;
                     }
-                    else
-                    {
-                        celsius = 0;
-                    }
-
                 }
             }
+            public void Deposit(decimal amount)
+            {
+                if (amount > 0)
+                {
+                    Balance += amount;
+                }
+            }
+            public void Withdraw(decimal amount)
+            {
+                if (amount > 0 && Balance - amount >= 0)
+                {
+                    Balance -= amount;
+                }
+                else { Console.WriteLine("Not enough amount on deposit"); }
+            }
         }
-        static double ToFahrenheit(double C)
-        {
-            double F = C * 9 / 5 + 32;
-            return F;
-        }
+
         static void Main()
         {
-            double C = 100;
-            Temperature temperature = new Temperature() { Celsius = C };
-            if (C != temperature.Celsius)
-            {
-                Console.WriteLine("Temperature celsius is out of range");
-            }
-            Console.WriteLine($"Value in celsius is {temperature.Celsius}");
-            Console.WriteLine($"Value in farenheit is {ToFahrenheit(temperature.Celsius)}");
+            BankAccount account = new BankAccount() { Balance = 500 };
+            Console.WriteLine($"Starting Balance: {account.Balance}");
+            Console.WriteLine();
+
+            int withdraw = 700;
+            Console.WriteLine($"Try to withdraw {withdraw}");
+            account.Withdraw(withdraw);
+
+            Console.WriteLine();
+            Console.WriteLine($"Final Balance: {account.Balance}");
         }
     }
 }
