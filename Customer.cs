@@ -2,9 +2,7 @@
 {
     class Customer
     {
-
         private string personalNumber;
-
         public string PersonalNumber
         {
             get { return personalNumber; }
