@@ -2,23 +2,40 @@
 {
     internal class Program
     {
-        class Circle
+        class Vector2D
         {
-            const double Pi = 3.14159;
-            public readonly double Radius;
-
-            public double GetArea() { return Pi * Radius * Radius; }
-
-            public Circle(double radius)
+            double X, Y;
+            public static Vector2D operator +(Vector2D v1, Vector2D v2)
             {
-                Radius = radius;
+                return new Vector2D(v1.X + v2.X, v1.Y + v2.Y);
+            }
+            public static Vector2D operator -(Vector2D v1, Vector2D v2)
+            {
+                return new Vector2D(v1.X - v2.X, v1.Y - v2.Y);
+
+            }
+            public static Vector2D operator -(Vector2D v1)
+            {
+                return new Vector2D(-v1.X, -v1.Y);
+            }
+            public override string ToString()
+            {
+                return ($"({X},{Y})");
+            }
+            public Vector2D(double x, double y)
+            {
+                X = x;
+                Y = y;
             }
 
         }
         static void Main()
         {
-            Circle circle = new Circle(5);
-            Console.WriteLine($"The area of the circle with radius {circle.Radius} is {circle.GetArea()}");
+            Vector2D v1 = new Vector2D(3, 4);
+            Vector2D v2 = new Vector2D(1, 2);
+            Console.WriteLine((v1 + v2).ToString());
+            Console.WriteLine((v1 - v2).ToString());
+            Console.WriteLine((-v1).ToString());
 
         }
     }
