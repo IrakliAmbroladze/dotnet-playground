@@ -2,65 +2,62 @@
 {
     internal class Program
     {
-        class Fraction
+        class Money
         {
-            int Numerator;
-            int Denominator;
-            public static Fraction operator *(Fraction a, Fraction b)
-            {
-                return new Fraction(a.Numerator * b.Numerator, a.Denominator * b.Denominator);
-            }
-            public static Fraction operator /(Fraction a, Fraction b)
-            {
-                if (b.Numerator == 0) throw new ArgumentException("can't devide by zero");
-                return new Fraction(a.Numerator * b.Denominator, a.Denominator * b.Numerator);
-            }
+            decimal Amount;
+            string Currency;
 
-            public static bool operator ==(Fraction a, Fraction b)
+            public static bool operator >(Money a, Money b)
             {
-                return a.Numerator * b.Denominator == a.Denominator * b.Numerator;
-            }
-
-            public static bool operator !=(Fraction a, Fraction b)
-            {
-                return a.Numerator * b.Denominator != a.Denominator * b.Numerator;
-            }
-            public override bool Equals(object? obj)
-            {
-                if (obj is Fraction other)
+                if (a.Currency != b.Currency)
                 {
-                    return this == other;
+                    throw new InvalidOperationException(a.Currency + " and " + b.Currency);
                 }
+                return a.Amount > b.Amount;
+            }
+            public static bool operator <(Money a, Money b)
+            {
+                if (a.Currency != b.Currency)
+                {
+                    throw new InvalidOperationException(a.Currency + " and " + b.Currency);
+                }
+                return a.Amount < b.Amount;
+            }
+            public static Money operator +(Money a, decimal b)
+            {
+                return new Money(a.Amount + b, a.Currency);
+            }
+            public static Money operator ++(Money a)
+            {
+                return new Money(a.Amount + 1, a.Currency);
+            }
 
-                return false;
-            }
-            public override int GetHashCode()
+            public Money(decimal value, string currency)
             {
-                return HashCode.Combine(Numerator, Denominator);
-            }
-            public Fraction(int numerator, int denominator)
-            {
-                if (denominator == 0)
-                    throw new ArgumentException("Denominator cannot be zero.");
-                Numerator = numerator;
-                Denominator = denominator;
+                this.Amount = value;
+                this.Currency = currency;
             }
             public override string ToString()
             {
-                if (Numerator == Denominator)
-                {
-                    return "1";
-                }
-                return $"{Numerator}/{Denominator}";
+                return $"{Amount} {Currency}";
             }
+
         }
         static void Main()
         {
-            Fraction f1 = new Fraction(1, 2);
-            Fraction f2 = new Fraction(2, 4);
-            Console.WriteLine($"does {f1} equal to {f2}? {f1 == f2}");
-            Console.WriteLine($"{f1} x {f2} = {f1 * f2}");
-            Console.WriteLine($"{f1} / {f2} = {f1 / f2}");
+            Money m1 = new Money(100, "GEL");
+            Money m2 = new Money(150, "GEL");
+            Console.WriteLine($"is {m1} < {m2}? {m1 < m2}");
+            Console.WriteLine($"{m1} + 50 GEL = {m1 + 50}");
+            Console.WriteLine($"increase {m1} by 1 GEL is {++m1}");
+            Console.WriteLine();
+
+            Money m3 = new Money(100, "USD");
+            Console.WriteLine("Demonstation of comparing different currencies throws an error");
+            Console.WriteLine();
+            Console.WriteLine(m1 < m3);
+            Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }
