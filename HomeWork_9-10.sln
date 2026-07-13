@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWork_9-10", "HomeWork_9-10.csproj", "{CE63C1CF-60FF-402E-8970-C0904109C126}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonLib", "..\PersonLib\PersonLib.csproj", "{BBDA628E-5561-41D8-98B0-3D54E9AD0EE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonLib", "..\PersonLib\PersonLib.csproj", "{BBDA628E-5561-41D8-98B0-3D54E9AD0EE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts", "..\Accounts\Accounts.csproj", "{AED3F6CB-5785-4A40-B50B-853848ADE384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BBDA628E-5561-41D8-98B0-3D54E9AD0EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBDA628E-5561-41D8-98B0-3D54E9AD0EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBDA628E-5561-41D8-98B0-3D54E9AD0EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED3F6CB-5785-4A40-B50B-853848ADE384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED3F6CB-5785-4A40-B50B-853848ADE384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED3F6CB-5785-4A40-B50B-853848ADE384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED3F6CB-5785-4A40-B50B-853848ADE384}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
