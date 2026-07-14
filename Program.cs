@@ -1,14 +1,40 @@
-﻿using Accounts;
+﻿using Georgia;
 
 namespace Georgia
 {
-
-    internal class Program
+    class Product
     {
-        static void Main()
+        int price = 0;
+        public int Price
         {
-            User user = new User("Irakli", 35);
-            Console.WriteLine($"{user.Name} is {user.Age} years old");
+            get { return price; }
+            set
+            {
+                if (value < 0)
+                {
+                    price = 0;
+                }
+                else
+                {
+                    price = value;
+                }
+            }
+        }
+        public Product(int price)
+        {
+            this.Price = price;
+        }
+    }
+}
+internal class Program
+{
+    static void Main()
+    {
+        while (true)
+        {
+            int input = int.Parse(Console.ReadLine());
+            Product product = new Product(input);
+            Console.WriteLine(product.Price);
         }
     }
 }
