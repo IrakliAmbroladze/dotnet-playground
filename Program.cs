@@ -4,25 +4,11 @@ namespace Georgia
 {
     class Product
     {
-        int price = 0;
-        public int Price
+        public const string Currency = "GEL";
+        public readonly string Name;
+        public Product(string name)
         {
-            get { return price; }
-            set
-            {
-                if (value < 0)
-                {
-                    price = 0;
-                }
-                else
-                {
-                    price = value;
-                }
-            }
-        }
-        public Product(int price)
-        {
-            this.Price = price;
+            Name = name;
         }
     }
 }
@@ -30,11 +16,9 @@ internal class Program
 {
     static void Main()
     {
-        while (true)
-        {
-            int input = int.Parse(Console.ReadLine());
-            Product product = new Product(input);
-            Console.WriteLine(product.Price);
-        }
+        Product product = new Product("Car");
+        Console.WriteLine(Product.Currency);
+
+        Console.WriteLine(product.Name);
     }
 }
