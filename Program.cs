@@ -1,24 +1,29 @@
-﻿using Georgia;
-
-namespace Georgia
+﻿namespace Georgia
 {
-    class Product
+    class Person
     {
-        public const string Currency = "GEL";
-        public readonly string Name;
-        public Product(string name)
+        public string FirstName, LastName;
+        public Person(string FirstName, string LastName)
         {
-            Name = name;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
         }
     }
-}
-internal class Program
-{
-    static void Main()
-    {
-        Product product = new Product("Car");
-        Console.WriteLine(Product.Currency);
 
-        Console.WriteLine(product.Name);
+    class Student : Person
+    {
+        public double GPA;
+        public Student(string FirstName, string LastName, double GPA) : base(FirstName, LastName)
+        {
+            this.GPA = GPA;
+        }
+    }
+    internal class Program
+    {
+        static void Main()
+        {
+            Student student = new Student("Irakli", "Ambroladze", 3.5);
+            Console.WriteLine($"{student.FirstName} {student.LastName} has GPA {student.GPA}");
+        }
     }
 }

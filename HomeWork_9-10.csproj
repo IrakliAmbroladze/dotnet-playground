@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Accounts\Accounts.csproj" />
+    <ProjectReference Include="..\CompanyCore\CompanyCore.csproj" />
     <ProjectReference Include="..\PersonLib\PersonLib.csproj" />
   </ItemGroup>
 
