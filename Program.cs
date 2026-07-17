@@ -2,28 +2,38 @@
 {
     class Person
     {
-        public string FirstName, LastName;
-        public Person(string FirstName, string LastName)
+        public string FirstName, LastName, PersonalNumber;
+
+        public Person(string FirstName, string LastName, string PersonalNumber)
         {
             this.FirstName = FirstName;
             this.LastName = LastName;
+            this.PersonalNumber = PersonalNumber;
         }
     }
 
-    class Student : Person
+    class Employee : Person
     {
-        public double GPA;
-        public Student(string FirstName, string LastName, double GPA) : base(FirstName, LastName)
+        public double Salary;
+        public Employee(string FirstName, string LastName, string PersonalNumber, double Salary) : base(FirstName, LastName, PersonalNumber)
         {
-            this.GPA = GPA;
+            this.Salary = Salary;
+        }
+    }
+    class Teacher : Employee
+    {
+        public string Subject;
+        public Teacher(string FirstName, string LastName, string PersonalNumber, double Salary, string Subject) : base(FirstName, LastName, PersonalNumber, Salary)
+        {
+            this.Subject = Subject;
         }
     }
     internal class Program
     {
         static void Main()
         {
-            Student student = new Student("Irakli", "Ambroladze", 3.5);
-            Console.WriteLine($"{student.FirstName} {student.LastName} has GPA {student.GPA}");
+            Teacher teacher = new Teacher("Emeliane", "Gogilidze", "12345678910", 10000, ".Net");
+            Console.WriteLine($"{teacher.FirstName} {teacher.LastName} with ID {teacher.PersonalNumber} has salary of {teacher.Salary} and teaches {teacher.Subject}");
         }
     }
 }
