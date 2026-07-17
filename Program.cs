@@ -1,57 +1,41 @@
 ﻿namespace Georgia
 {
-    abstract class Person
+    abstract class Vehicle
     {
-        public string Name { get; set; }
-
-        public Person(string Name)
+        public string Brand;
+        public Vehicle(string brand)
         {
-            this.Name = Name;
+            Brand = brand;
         }
-
-        public abstract void Introduce();
+        public abstract void Move();
     }
-    class Student : Person
+    class Car : Vehicle
     {
-        double GPA { get; set; }
-
-        public Student(string Name, double GPA) : base(Name)
+        public Car(string brand) : base(brand) { }
+        public override void Move()
         {
-            this.GPA = GPA;
-        }
-        public override void Introduce()
-        {
-            Console.WriteLine($"Hello, I am a student {Name}, my GPA is {GPA}");
+            Console.WriteLine("Manqana modzraobs benzinze");
         }
     }
-    class Teacher : Person
+    class Bicycle : Vehicle
     {
-        string Subject { get; set; }
-
-        public Teacher(string Name, string Subject) : base(Name)
+        public Bicycle(string brand) : base(brand) { }
+        public override void Move()
         {
-            this.Subject = Subject;
-        }
-
-        public override void Introduce()
-        {
-            Console.WriteLine($"Hello, I am a teacher {Name}, I teach {Subject}");
+            Console.WriteLine("Velosipedi modzraobs fekhebis dzalit");
         }
     }
 
 
     internal class Program
     {
-        public static void HelloMethod(Person person)
-        {
-            person.Introduce();
-        }
         static void Main()
         {
-            Student student = new Student("Irakli", 3.5);
-            Teacher teacher = new Teacher("Emeliane", ".Net");
-            HelloMethod(student);
-            HelloMethod(teacher);
+            Vehicle car = new Car("Toyota");
+            car.Move();
+            Console.WriteLine();
+            Car carDowncast = (Car)car;
+            Console.WriteLine(carDowncast.Brand);
         }
     }
 }
