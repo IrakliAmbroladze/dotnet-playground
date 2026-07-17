@@ -1,41 +1,30 @@
 ﻿namespace Georgia
 {
-    abstract class Vehicle
-    {
-        public string Brand;
-        public Vehicle(string brand)
-        {
-            Brand = brand;
-        }
-        public abstract void Move();
-    }
-    class Car : Vehicle
-    {
-        public Car(string brand) : base(brand) { }
-        public override void Move()
-        {
-            Console.WriteLine("Manqana modzraobs benzinze");
-        }
-    }
-    class Bicycle : Vehicle
-    {
-        public Bicycle(string brand) : base(brand) { }
-        public override void Move()
-        {
-            Console.WriteLine("Velosipedi modzraobs fekhebis dzalit");
-        }
-    }
-
-
     internal class Program
     {
         static void Main()
         {
-            Vehicle car = new Car("Toyota");
-            car.Move();
+            int a = 100;
+            object boxedInt = a;
+            Console.WriteLine("Boxed int:");
+            Console.WriteLine(boxedInt.GetType());
+            int backToInt = (int)boxedInt;
             Console.WriteLine();
-            Car carDowncast = (Car)car;
-            Console.WriteLine(carDowncast.Brand);
+            Console.WriteLine($"initial value is {a}");
+            Console.WriteLine($"last value is {backToInt}");
+            Console.WriteLine();
+
+            bool boolValue = true;
+            object boxedBoolValue = boolValue;
+            Console.WriteLine("Boxed bool:");
+            Console.WriteLine(boxedBoolValue.GetType());
+            Console.WriteLine();
+
+            decimal decimalValue = 10.5m;
+            object boxedDecimalValue = decimalValue;
+            Console.WriteLine("Boxed decimal:");
+            Console.WriteLine(boxedDecimalValue.GetType());
+
         }
     }
 }
