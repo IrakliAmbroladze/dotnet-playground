@@ -1,45 +1,66 @@
 ﻿namespace Georgia
 {
-    class BankAccount
+    abstract class Person
     {
-        // ყველასთვის ხელმისაწვდომია
-        public string AccountNumber = "GE123456789";
+        public string Name { get; set; }
 
-        // მხოლოდ ამ კლასსა და მის მემკვიდრეებს
-        protected decimal Balance = 5000;
-
-        // მხოლოდ ამ კლასის შიგნით
-        private int PinCode = 1234;
-
-        // მხოლოდ ამავე Assembly-ში
-        internal string BankName = "Bank of Georgia";
-    }
-
-    class SavingsAccount : BankAccount
-    {
-        public void Display()
+        public Person(string Name)
         {
-            // შესაძლებელია, რადგან public-ია
-            Console.WriteLine(AccountNumber);
+            this.Name = Name;
+        }
 
-            // შესაძლებელია, რადგან protected-ია
-            Console.WriteLine(Balance);
+        public abstract void Introduce();
+    }
+    class Student : Person
+    {
+        double GPA { get; set; }
 
-            // შეუძლებელია, რადგან private-ია
-            // Console.WriteLine(PinCode);
-
-            // შესაძლებელია, რადგან internal-ია
-            // (ორივე კლასი ერთ Assembly-შია)
-            Console.WriteLine(BankName);
+        public Student(string Name, double GPA) : base(Name)
+        {
+            this.GPA = GPA;
+        }
+        public override void Introduce()
+        {
+            Console.WriteLine($"Hello, I am a student {Name}, my GPA is {GPA}");
         }
     }
+    class Teacher : Person
+    {
+        string Subject { get; set; }
+
+        public Teacher(string Name, string Subject) : base(Name)
+        {
+            this.Subject = Subject;
+        }
+
+        public override void Introduce()
+        {
+            Console.WriteLine($"Hello, I am a teacher {Name}, I teach {Subject}");
+        }
+    }
+
 
     internal class Program
     {
+        public static void HelloMethod(Person person)
+        {
+            person.Introduce();
+        }
         static void Main()
         {
-            SavingsAccount account = new SavingsAccount();
-            account.Display();
+            Student student = new Student("Irakli", 3.5);
+            Teacher teacher = new Teacher("Emeliane", ".Net");
+            HelloMethod(student);
+            HelloMethod(teacher);
         }
     }
 }
+
+
+
+
+
+
+
+
+
