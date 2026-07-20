@@ -1,44 +1,42 @@
 ﻿namespace Georgia
 {
+    abstract class Person
+    {
+        abstract public void Talk();
+    }
+    class Subject
+    {
+        public string Name { get; set; } = string.Empty;
+        public int Hours { get; set; }
+    }
+
+    class Teacher : Person
+    {
+        public string Name { get; set; }
+        public Subject Subject { get; set; }
+
+        public Teacher(string name, Subject subject)
+        {
+            Name = name;
+            Subject = subject;
+        }
+        public override void Talk()
+        {
+            Console.WriteLine($"Teacher {Name} teaches {Subject.Name}");
+        }
+
+
+    }
     internal class Program
     {
         static void Main()
         {
-            Console.WriteLine("The following program makes math operations on two numbers.");
-            Console.WriteLine();
-            Console.Write("Enter number one: ");
-            string inputOne = Console.ReadLine();
-            Console.Write("Enter number two: ");
-            string inputTwo = Console.ReadLine();
-
-            try
-            {
-                double numberOne = Convert.ToDouble(inputOne);
-                double numberTwo = Convert.ToDouble(inputTwo);
-                Console.WriteLine();
-
-                Console.WriteLine($"{numberOne} + {numberTwo} = {numberOne + numberTwo}");
-                Console.WriteLine($"{numberOne} - {numberTwo} = {numberOne - numberTwo}");
-                Console.WriteLine($"{numberOne} x {numberTwo} = {numberOne * numberTwo}");
-
-                if (numberTwo == 0) { throw new DivideByZeroException(); }
-                Console.WriteLine($"{numberOne} / {numberTwo} = {numberOne / numberTwo}");
-
-                Console.WriteLine($"{numberOne} ^ {numberTwo} = {Math.Pow(numberOne, numberTwo)}");
-                Console.WriteLine($"Calculations performed at {DateTime.Now}");
-            }
-            catch (DivideByZeroException)
-            {
-                Console.WriteLine("Cannot divide by zero.");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Please enter valid numbers.");
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Unknown error.");
-            }
+            Subject subject = new Subject();
+            subject.Name = ".NET";
+            subject.Hours = 4;
+            Person teacher = new Teacher("Emeliane", subject);
+            teacher.Talk();
         }
     }
+
 }
