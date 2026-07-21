@@ -1,36 +1,35 @@
 ﻿namespace Georgia
 {
-    abstract class PaymentMethod
+    abstract class Person
     {
-        abstract public void Pay(decimal amount);
     }
-    class CardPayment : PaymentMethod
+
+    class Client : Person
     {
-        public override void Pay(decimal amount)
+        public decimal Balance { get; set; }
+        public Client(decimal amount)
         {
-            Console.WriteLine($"Card payment amount will be {amount * 1.2m}");
+            Balance = amount;
         }
+
     }
-    class CashPayment : PaymentMethod
-    {
-        public override void Pay(decimal amount)
-        {
-            Console.WriteLine($"Cash payment amount will be {amount * 1.1m}");
-        }
-    }
-    class CryptoPayment : PaymentMethod
-    {
-        public override void Pay(decimal amount)
-        {
-            Console.WriteLine($"Crypto payment amount will be {amount * 1.05m}");
-        }
-    }
+    class Employee : Person { }
     internal class Program
     {
         static void Main()
         {
-            PaymentMethod payment = new CashPayment();
-            payment.Pay(100);
+            try
+            {
+                Person person = new Client(100);
+                Client downcastPerson = (Client)person;
+                Console.WriteLine(downcastPerson.Balance);
+                Employee secondDowncastPerson = (Employee)person;
+            }
+            catch (InvalidCastException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 
