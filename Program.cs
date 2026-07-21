@@ -1,41 +1,36 @@
 ﻿namespace Georgia
 {
-    abstract class Person
+    abstract class PaymentMethod
     {
-        abstract public void Talk();
+        abstract public void Pay(decimal amount);
     }
-    class Subject
+    class CardPayment : PaymentMethod
     {
-        public string Name { get; set; } = string.Empty;
-        public int Hours { get; set; }
+        public override void Pay(decimal amount)
+        {
+            Console.WriteLine($"Card payment amount will be {amount * 1.2m}");
+        }
     }
-
-    class Teacher : Person
+    class CashPayment : PaymentMethod
     {
-        public string Name { get; set; }
-        public Subject Subject { get; set; }
-
-        public Teacher(string name, Subject subject)
+        public override void Pay(decimal amount)
         {
-            Name = name;
-            Subject = subject;
+            Console.WriteLine($"Cash payment amount will be {amount * 1.1m}");
         }
-        public override void Talk()
+    }
+    class CryptoPayment : PaymentMethod
+    {
+        public override void Pay(decimal amount)
         {
-            Console.WriteLine($"Teacher {Name} teaches {Subject.Name}");
+            Console.WriteLine($"Crypto payment amount will be {amount * 1.05m}");
         }
-
-
     }
     internal class Program
     {
         static void Main()
         {
-            Subject subject = new Subject();
-            subject.Name = ".NET";
-            subject.Hours = 4;
-            Person teacher = new Teacher("Emeliane", subject);
-            teacher.Talk();
+            PaymentMethod payment = new CashPayment();
+            payment.Pay(100);
         }
     }
 
