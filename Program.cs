@@ -2,14 +2,19 @@
 {
     internal class Program
     {
-        static string ReverseString(string s)
-        {
-            return new string(s.Reverse().ToArray());
-        }
         static void Main(string[] args)
         {
-            Func<string, string> rev = ReverseString;
-            Console.WriteLine(rev("a string"));
+            List<int> list = new List<int>();
+            for (int i = 0; i < 100; i++)
+            {
+                list.Add(i);
+            }
+
+            List<int> result = list.FindAll(
+                delegate (int no) { return (no % 2 == 0); }
+                );
+
+            foreach (var item in result) { Console.WriteLine(item); }
 
         }
     }
