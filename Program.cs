@@ -2,46 +2,42 @@
 {
     internal class Program
     {
-        class Animal<T>
+        class InsufficientFundsException : Exception
         {
-            public T ID { get; set; }
-            public void Identify()
-            {
-                Console.WriteLine($"Identity is {ID}");
-            }
+            public InsufficientFundsException(string message) : base(message) { }
         }
-        class Dog<T> : Animal<T>
+        static decimal Withdraw(decimal balance, decimal amount)
         {
-            public void Bark()
-            {
-                Console.WriteLine($"Dog with ID {ID} is barking.");
-            }
+            if (amount > balance) throw new InsufficientFundsException("Not enough money");
+            return balance - amount;
         }
-        class DogFixed : Animal<int>
-        {
-            public void Bark()
-            {
-                Console.WriteLine($"Dog with ID {ID} is barking.");
-            }
-        }
+
         static void Main(string[] args)
         {
-            Dog<string> dog = new Dog<string>()
+            decimal balance = 100;
+            decimal amount = 250;
+            try
             {
-                ID = "Poodle-001"
-            };
+                decimal remaining = Withdraw(balance, amount);
+                Console.WriteLine($"Remaining balance: {remaining}");
 
-            dog.Identify();
-            dog.Bark();
-            Console.WriteLine();
-
-            DogFixed fixedDog = new DogFixed();
-            fixedDog.ID = 101;
-
-            fixedDog.Identify();
-            fixedDog.Bark();
+                int x = 10;
+                int y = 0;
+                Console.WriteLine(x / y);
+            }
+            catch (InsufficientFundsException ex) when (amount - balance > 100)
+            {
+                Console.WriteLine("More than 100 is shortage.");
+                Console.WriteLine(ex.Message);
+            }
+            catch (InsufficientFundsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
-
-
 }
