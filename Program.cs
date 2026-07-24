@@ -1,6 +1,6 @@
 ﻿namespace Georgia
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -10,9 +10,7 @@
                 list.Add(i);
             }
 
-            List<int> result = list.FindAll(
-                delegate (int no) { return (no % 2 == 0); }
-                );
+            List<int> result = list.FindAll(i => i % 2 == 0);
 
             foreach (var item in result) { Console.WriteLine(item); }
 
