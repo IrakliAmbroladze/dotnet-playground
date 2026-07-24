@@ -1,40 +1,37 @@
 ﻿namespace Georgia
 {
-    class Box<T>
-    {
-        private T? Value { get; set; }
-        public Box(T value)
-        {
-            this.Value = value;
-        }
-        public void ShowValue()
-        {
-            Console.WriteLine($"The value is {Value}");
-        }
-        public bool IsEmpty() { return Value == null; }
-    }
+    static
 
 
     internal class Program
     {
+
+        static T FindMax<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length == 0)
+            {
+                throw new ArgumentException("Array cannot be null or empty.");
+            }
+
+            T max = array[0];
+
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i].CompareTo(max) > 0)
+                {
+                    max = array[i];
+                }
+            }
+
+            return max;
+        }
         static void Main()
         {
-            Box<int> boxInt = new Box<int>(15);
-            Box<string> boxString = new Box<string>("Hello");
-            Box<double> boxDouble = new Box<double>(1.5);
+            int[] numbers = { 10, 45, 3, 99, 27 };
+            Console.WriteLine($"Max number: {FindMax(numbers)}");
 
-            boxInt.ShowValue();
-            Console.WriteLine($"Is it null? {boxInt.IsEmpty()}");
-            Console.WriteLine();
-
-            boxString.ShowValue();
-            Console.WriteLine($"Is it null? {boxString.IsEmpty()}");
-            Console.WriteLine();
-
-            boxDouble.ShowValue();
-            Console.WriteLine($"Is it null? {boxDouble.IsEmpty()}");
-            Console.WriteLine();
-
+            string[] names = { "Giorgi", "Irakli", "Ana", "Zura" };
+            Console.WriteLine($"Max name: {FindMax(names)}");
         }
     }
 
