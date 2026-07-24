@@ -1,38 +1,47 @@
 ﻿namespace Georgia
 {
-    static
-
-
     internal class Program
     {
-
-        static T FindMax<T>(T[] array) where T : IComparable<T>
+        class Animal<T>
         {
-            if (array == null || array.Length == 0)
+            public T ID { get; set; }
+            public void Identify()
             {
-                throw new ArgumentException("Array cannot be null or empty.");
+                Console.WriteLine($"Identity is {ID}");
             }
-
-            T max = array[0];
-
-            for (int i = 1; i < array.Length; i++)
-            {
-                if (array[i].CompareTo(max) > 0)
-                {
-                    max = array[i];
-                }
-            }
-
-            return max;
         }
-        static void Main()
+        class Dog<T> : Animal<T>
         {
-            int[] numbers = { 10, 45, 3, 99, 27 };
-            Console.WriteLine($"Max number: {FindMax(numbers)}");
+            public void Bark()
+            {
+                Console.WriteLine($"Dog with ID {ID} is barking.");
+            }
+        }
+        class DogFixed : Animal<int>
+        {
+            public void Bark()
+            {
+                Console.WriteLine($"Dog with ID {ID} is barking.");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Dog<string> dog = new Dog<string>()
+            {
+                ID = "Poodle-001"
+            };
 
-            string[] names = { "Giorgi", "Irakli", "Ana", "Zura" };
-            Console.WriteLine($"Max name: {FindMax(names)}");
+            dog.Identify();
+            dog.Bark();
+            Console.WriteLine();
+
+            DogFixed fixedDog = new DogFixed();
+            fixedDog.ID = 101;
+
+            fixedDog.Identify();
+            fixedDog.Bark();
         }
     }
+
 
 }
