@@ -1,34 +1,39 @@
 ﻿namespace Georgia
 {
-    abstract class Person
+    class Box<T>
     {
-    }
-
-    class Client : Person
-    {
-        public decimal Balance { get; set; }
-        public Client(decimal amount)
+        private T? Value { get; set; }
+        public Box(T value)
         {
-            Balance = amount;
+            this.Value = value;
         }
-
+        public void ShowValue()
+        {
+            Console.WriteLine($"The value is {Value}");
+        }
+        public bool IsEmpty() { return Value == null; }
     }
-    class Employee : Person { }
+
+
     internal class Program
     {
         static void Main()
         {
-            try
-            {
-                Person person = new Client(100);
-                Client downcastPerson = (Client)person;
-                Console.WriteLine(downcastPerson.Balance);
-                Employee secondDowncastPerson = (Employee)person;
-            }
-            catch (InvalidCastException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            Box<int> boxInt = new Box<int>(15);
+            Box<string> boxString = new Box<string>("Hello");
+            Box<double> boxDouble = new Box<double>(1.5);
+
+            boxInt.ShowValue();
+            Console.WriteLine($"Is it null? {boxInt.IsEmpty()}");
+            Console.WriteLine();
+
+            boxString.ShowValue();
+            Console.WriteLine($"Is it null? {boxString.IsEmpty()}");
+            Console.WriteLine();
+
+            boxDouble.ShowValue();
+            Console.WriteLine($"Is it null? {boxDouble.IsEmpty()}");
+            Console.WriteLine();
 
         }
     }
