@@ -2,42 +2,51 @@
 {
     internal class Program
     {
-        class InsufficientFundsException : Exception
+        public delegate void AccountStateHandler(string message);
+        class Account
         {
-            public InsufficientFundsException(string message) : base(message) { }
+            public decimal Balance { get; set; }
+            public AccountStateHandler? Notify;
+            public Account(decimal balance) { Balance = balance; }
+            public void Fill(decimal amount)
+            {
+                Balance += amount;
+                Notify?.Invoke($"Deposited: {amount}. Balance: {Balance}");
+            }
+
+            public void Withdraw(decimal amount)
+            {
+                if (amount > Balance)
+                {
+                    Notify?.Invoke($"Withdrawal failed. Balance: {Balance}");
+                    return;
+                }
+                Balance -= amount;
+                Notify?.Invoke($"Withdrawn: {amount}. Balance: {Balance}");
+            }
         }
-        static decimal Withdraw(decimal balance, decimal amount)
-        {
-            if (amount > balance) throw new InsufficientFundsException("Not enough money");
-            return balance - amount;
-        }
+        static void DisplayInfoConsole(string text) { Console.WriteLine(text); }
+        static void DisplayInfoInFile(string text) { File.AppendAllText("C:\\Users\\Irakli\\OneDrive\\desktop\\AccountLogger.txt", text + Environment.NewLine); }
 
         static void Main(string[] args)
         {
-            decimal balance = 100;
-            decimal amount = 250;
-            try
-            {
-                decimal remaining = Withdraw(balance, amount);
-                Console.WriteLine($"Remaining balance: {remaining}");
+            Account account = new Account(100);
 
-                int x = 10;
-                int y = 0;
-                Console.WriteLine(x / y);
-            }
-            catch (InsufficientFundsException ex) when (amount - balance > 100)
-            {
-                Console.WriteLine("More than 100 is shortage.");
-                Console.WriteLine(ex.Message);
-            }
-            catch (InsufficientFundsException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (DivideByZeroException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            AccountStateHandler handler = DisplayInfoConsole;
+            handler += DisplayInfoInFile;
+
+            account.Notify = handler;
+
+            account.Fill(50);
+            account.Withdraw(30);
+
+            Console.WriteLine();
+
+            handler -= DisplayInfoInFile;
+
+            account.Notify = handler;
+
+            account.Fill(100);
         }
     }
 }
