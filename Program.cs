@@ -4,20 +4,16 @@
     {
         static void Main(string[] args)
         {
-            Action<int> printIfEven = (int value) =>
+            List<int> numbers = new List<int> { 4, 9, 15, 22, 30, 41, 56 };
+
+            Predicate<int> isDivisibleByThree = number => number % 3 == 0;
+
+            List<int> result = numbers.FindAll(isDivisibleByThree);
+
+            foreach (int number in result)
             {
-                if (value % 2 == 0)
-                {
-                    Console.WriteLine(value);
-                }
-
-            };
-            printIfEven(7);
-            printIfEven(12);
-            printIfEven(21);
-            printIfEven(22);
-
-
+                Console.WriteLine(number);
+            }
         }
     }
 }
