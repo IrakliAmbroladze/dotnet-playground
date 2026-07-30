@@ -4,15 +4,19 @@
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int>();
-            for (int i = 0; i < 100; i++)
+            Action<int> printIfEven = (int value) =>
             {
-                list.Add(i);
-            }
+                if (value % 2 == 0)
+                {
+                    Console.WriteLine(value);
+                }
 
-            List<int> result = list.FindAll(i => i % 2 == 0);
+            };
+            printIfEven(7);
+            printIfEven(12);
+            printIfEven(21);
+            printIfEven(22);
 
-            foreach (var item in result) { Console.WriteLine(item); }
 
         }
     }
