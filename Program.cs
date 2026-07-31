@@ -4,16 +4,12 @@
     {
         static void Main(string[] args)
         {
-            List<int> numbers = new List<int> { 3, 8, 12, 17, 24, 31, 40, 55 };
 
-            Predicate<int> isDivisibleByFour = (int x) => x % 4 == 0;
+            Func<int, int, string> compareNumbers = (int x, int y) => (x > y) ? "First is greater" : (x < y) ? "Second is greater" : "Numbers are equal";
 
-            List<int> result = numbers.FindAll(isDivisibleByFour);
-
-            foreach (int x in result)
-            {
-                Console.WriteLine(x);
-            }
+            Console.WriteLine(compareNumbers(7, 5));
+            Console.WriteLine(compareNumbers(2, 5));
+            Console.WriteLine(compareNumbers(5, 5));
         }
     }
 }
