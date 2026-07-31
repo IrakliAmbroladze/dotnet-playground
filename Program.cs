@@ -4,31 +4,22 @@
     {
         static void Main(string[] args)
         {
-            Queue<string> ticketQueue = new Queue<string>();
-            Stack<string> actionHistory = new Stack<string>();
+            Dictionary<string, int> studentGrades = new Dictionary<string, int>();
+            studentGrades.Add("Giorgi", 97);
+            studentGrades.Add("Ana", 84);
+            studentGrades.Add("Tornike", 70);
+            studentGrades.Add("Saba", 90);
+            studentGrades.Add("Teona", 99);
 
-            ticketQueue.Enqueue("Irakli");
-            ticketQueue.Enqueue("Luka");
-            ticketQueue.Enqueue("Daviti");
-            ticketQueue.Enqueue("Nino");
-            ticketQueue.Enqueue("Tamari");
-            actionHistory.Push(ticketQueue.Dequeue());
-            actionHistory.Push(ticketQueue.Dequeue());
-            Console.WriteLine($"Next in queue: {ticketQueue.Peek()}");
-            Console.WriteLine($"Removed from history: {actionHistory.Pop()}");
-            Console.WriteLine();
-            Console.WriteLine("Remaining queue:");
-            foreach (string customer in ticketQueue)
+            foreach (var student in studentGrades)
             {
-                Console.WriteLine(customer);
+                Console.WriteLine($"{student.Key}: score {student.Value}");
             }
-
-            Console.WriteLine();
-
-            Console.WriteLine("History:");
-            foreach (string customer in actionHistory)
+            studentGrades.Remove("Tornike");
+            Console.WriteLine("--------------");
+            foreach (var student in studentGrades)
             {
-                Console.WriteLine(customer);
+                if (student.Value > 90) Console.WriteLine($"{student.Key}'s score is above 90");
             }
         }
     }
