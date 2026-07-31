@@ -2,31 +2,19 @@
 {
     class Program
     {
-        interface IFlyable
-        {
-            void Fly();
-        }
-        interface ISwimmable
-        {
-            void Swim();
-        }
-        class Duck : IFlyable, ISwimmable
-        {
-            public void Fly()
-            {
-                Console.WriteLine("Can fly");
-            }
-            public void Swim()
-            {
-                Console.WriteLine("Can swim");
-            }
-        }
         static void Main(string[] args)
         {
+            Action<int, int> printResult = (int x, int y) =>
+            {
+                Console.WriteLine($"Sum: {x + y}");
+            };
+            printResult(15, 27);
 
-            Duck duck = new Duck();
-            duck.Swim();
-            duck.Fly();
+            Action<string> printString = (string name) =>
+            {
+                Console.WriteLine($"Hello {name}!");
+            };
+            printString("Irakli");
         }
     }
 }
