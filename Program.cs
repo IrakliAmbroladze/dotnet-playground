@@ -4,28 +4,32 @@
     {
         static void Main(string[] args)
         {
-            LinkedList<string> cities = new LinkedList<string>();
-            cities.AddLast("Tbilisi");
-            cities.AddLast("Kutaisi");
-            cities.AddLast("Batumi");
-            cities.AddLast("Gori");
+            Queue<string> ticketQueue = new Queue<string>();
+            Stack<string> actionHistory = new Stack<string>();
 
-            cities.AddFirst("Telavi");
-
-            if (cities.First != null)
+            ticketQueue.Enqueue("Irakli");
+            ticketQueue.Enqueue("Luka");
+            ticketQueue.Enqueue("Daviti");
+            ticketQueue.Enqueue("Nino");
+            ticketQueue.Enqueue("Tamari");
+            actionHistory.Push(ticketQueue.Dequeue());
+            actionHistory.Push(ticketQueue.Dequeue());
+            Console.WriteLine($"Next in queue: {ticketQueue.Peek()}");
+            Console.WriteLine($"Removed from history: {actionHistory.Pop()}");
+            Console.WriteLine();
+            Console.WriteLine("Remaining queue:");
+            foreach (string customer in ticketQueue)
             {
-                cities.AddAfter(cities.First, "Mtskheta");
+                Console.WriteLine(customer);
             }
-            if (cities.Last != null)
-            {
-                cities.AddBefore(cities.Last, "Akhalkalaki");
-            }
-            cities.RemoveFirst();
-            foreach (string city in cities)
-            {
-                Console.WriteLine(city);
-            };
 
+            Console.WriteLine();
+
+            Console.WriteLine("History:");
+            foreach (string customer in actionHistory)
+            {
+                Console.WriteLine(customer);
+            }
         }
     }
 }
