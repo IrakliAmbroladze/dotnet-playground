@@ -2,41 +2,34 @@
 {
     class Program
     {
-        interface IVehicle
+        interface IRepository<T>
         {
-            string Brand { get; set; }
-            void Start();
-            double CalculateFuelCost(double distanceKm, double consumptionPerKm);
+            void Add(T item);
         }
-        class Car : IVehicle
+        static void AddItem<T>(T item, IRepository<T> repository) where T : class { repository.Add(item); }
+        class StringRepository : IRepository<string>
         {
-            public string Brand { get; set; } = string.Empty;
-            public void Start() { Console.WriteLine($"{Brand} car has started!"); }
-            public double CalculateFuelCost(double distanceKm, double consumptionPerKm)
+            List<string> items = new List<string>();
+            public void Add(string item)
             {
-                return distanceKm * consumptionPerKm * 2.5;
-            }
-        }
-        class Motorcycle : IVehicle
-        {
-            public string Brand { get; set; } = string.Empty;
-            public void Start() { Console.WriteLine($"{Brand} motorcycle  has started!"); }
-            public double CalculateFuelCost(double distanceKm, double consumptionPerKm)
-            {
-                return distanceKm * consumptionPerKm * 1.5;
-            }
-        }
+                items.Add(item);
+                Console.WriteLine($"{item} added.");
+                Console.WriteLine("List is: ");
+                foreach (var item2 in items)
+                {
+                    Console.WriteLine(item2);
+                }
+                Console.WriteLine("------------");
 
+            }
+
+        }
         static void Main(string[] args)
         {
-            Car car = new Car() { Brand = "Toyota" };
-            Motorcycle motorcycle = new Motorcycle() { Brand = "Yamaha" };
-            IVehicle[] vehicles = new IVehicle[] { car, motorcycle };
-            foreach (IVehicle vehicle in vehicles)
-            {
-                vehicle.Start();
-                Console.WriteLine($"Fuel cost: {vehicle.CalculateFuelCost(100, 0.7)}");
-            }
+            StringRepository repository = new StringRepository();
+
+            AddItem("Hello", repository);
+            AddItem("World", repository);
         }
     }
 }
