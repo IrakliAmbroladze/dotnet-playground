@@ -4,17 +4,16 @@
     {
         static void Main(string[] args)
         {
-            Action<int, int> printResult = (int x, int y) =>
-            {
-                Console.WriteLine($"Sum: {x + y}");
-            };
-            printResult(15, 27);
+            List<int> numbers = new List<int> { 3, 8, 12, 17, 24, 31, 40, 55 };
 
-            Action<string> printString = (string name) =>
+            Predicate<int> isDivisibleByFour = (int x) => x % 4 == 0;
+
+            List<int> result = numbers.FindAll(isDivisibleByFour);
+
+            foreach (int x in result)
             {
-                Console.WriteLine($"Hello {name}!");
-            };
-            printString("Irakli");
+                Console.WriteLine(x);
+            }
         }
     }
 }
