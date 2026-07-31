@@ -4,30 +4,27 @@
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
-            int size = 10;
-            List<int> list = new List<int>();
-            for (int i = 0; i < size; i++)
+            LinkedList<string> cities = new LinkedList<string>();
+            cities.AddLast("Tbilisi");
+            cities.AddLast("Kutaisi");
+            cities.AddLast("Batumi");
+            cities.AddLast("Gori");
+
+            cities.AddFirst("Telavi");
+
+            if (cities.First != null)
             {
-                list.Add(random.Next(1, 100));
-                Console.WriteLine($"Capacity {list.Capacity}");
-                Console.WriteLine($"Count {list.Count}");
+                cities.AddAfter(cities.First, "Mtskheta");
             }
-            Console.WriteLine();
-            list.Sort();
-            Console.Write("List numbers: ");
-
-            foreach (int i in list) { Console.Write($"{i}, "); }
-            List<int> evenList = list.FindAll(x => x % 2 == 0);
-
-            Console.WriteLine();
-
-            Console.Write("Even numbers: ");
-            foreach (int i in evenList) { Console.Write($"{i}, "); }
-            Console.WriteLine();
-            list.TrimExcess();
-            Console.WriteLine($"Capacity after TrimExcess {list.Capacity}");
-            Console.WriteLine($"Count after TrimExcess {list.Count}");
+            if (cities.Last != null)
+            {
+                cities.AddBefore(cities.Last, "Akhalkalaki");
+            }
+            cities.RemoveFirst();
+            foreach (string city in cities)
+            {
+                Console.WriteLine(city);
+            };
 
         }
     }
