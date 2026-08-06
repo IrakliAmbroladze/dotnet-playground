@@ -4,9 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Car car = new Car() { Brand = "Toyota", EnginePower = 3.2 };
-            car.ShowInfo();
-            car.StartEngine();
+            Student student = new Student("Irakli", "Ambroladze", 35, 2.50);
+            student.ShowGrades();
         }
     }
 }
