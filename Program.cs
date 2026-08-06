@@ -2,25 +2,25 @@
 {
     class Program
     {
+        public static int CountWords(string input)
+        {
+            //int count = input.Split().Length;
+            int count = 0;
+            foreach (string word in input.Split())
+            {
+                if (word.Length > 0)
+                {
+                    count++;
+                }
+            }
+
+            Console.WriteLine(string.Join(", ", input.Split()));
+            return count;
+        }
         static void Main(string[] args)
         {
-            Dictionary<string, int> studentGrades = new Dictionary<string, int>();
-            studentGrades.Add("Giorgi", 97);
-            studentGrades.Add("Ana", 84);
-            studentGrades.Add("Tornike", 70);
-            studentGrades.Add("Saba", 90);
-            studentGrades.Add("Teona", 99);
-
-            foreach (var student in studentGrades)
-            {
-                Console.WriteLine($"{student.Key}: score {student.Value}");
-            }
-            studentGrades.Remove("Tornike");
-            Console.WriteLine("--------------");
-            foreach (var student in studentGrades)
-            {
-                if (student.Value > 90) Console.WriteLine($"{student.Key}'s score is above 90");
-            }
+            Console.WriteLine(CountWords("Hello there"));
+            Console.WriteLine(CountWords("Hello        dotnet at SkillWill"));
         }
     }
 }
