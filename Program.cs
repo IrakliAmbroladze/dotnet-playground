@@ -1,37 +1,51 @@
 ﻿using System.Diagnostics;
 
-static async Task<string> DownloadFileAsync(string fileName, int delayMs)
-{
-    await Task.Delay(delayMs);
+int maxNumber = 2_000_000;
+var numbers = Enumerable.Range(1, maxNumber);
 
-    Random rnd = new Random();
-    if (rnd.Next(1, 101) <= 30)
+Stopwatch sw = Stopwatch.StartNew();
+
+int linqCount = numbers
+    .Where(IsPrime)
+    .Count();
+
+sw.Stop();
+long linqTime = sw.ElapsedMilliseconds;
+
+Console.WriteLine($"With LINQ found: {linqCount} | time: {linqTime} ms");
+
+sw.Restart();
+int plinqCount = numbers
+    .AsParallel()
+    .Where(IsPrime)
+    .Count();
+sw.Stop();
+long plinqTime = sw.ElapsedMilliseconds;
+Console.WriteLine($"With PLINQ found: {plinqCount} | time: {plinqTime} ms");
+
+sw.Restart();
+int plinq4Count = numbers
+    .AsParallel()
+    .WithDegreeOfParallelism(4)
+    .Where(IsPrime)
+    .Count();
+sw.Stop();
+long plinq4Time = sw.ElapsedMilliseconds;
+Console.WriteLine($"With PLINQ4 found: {plinq4Count} | time: {plinq4Time} ms");
+
+static bool IsPrime(int number)
+{
+    if (number <= 1) return false;
+    if (number == 2) return true;
+    if (number % 2 == 0) return false;
+
+    int boundary = (int)Math.Floor(Math.Sqrt(number));
+
+    for (int i = 3; i <= boundary; i += 2)
     {
-        throw new Exception("Network error");
+        if (number % i == 0)
+            return false;
     }
-    return $"{fileName} is downloaded";
-}
 
-Stopwatch stopwatch = Stopwatch.StartNew();
-try
-{
-    string[] results = await Task.WhenAll(
-           DownloadFileAsync("First file", 1000),
-           DownloadFileAsync("Second file", 2000),
-           DownloadFileAsync("Third file", 1500)
-       );
-    foreach (string result in results)
-    {
-        Console.WriteLine(result);
-    }
-}
-catch (Exception e)
-{
-    Console.WriteLine($"Exception happened: {e.Message}");
-}
-finally
-{
-    stopwatch.Stop();
-    Console.WriteLine($"Whole process took time of {stopwatch.ElapsedMilliseconds} ms");
-
+    return true;
 }
