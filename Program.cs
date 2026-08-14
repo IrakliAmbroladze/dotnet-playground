@@ -1,51 +1,33 @@
-﻿using System.Diagnostics;
+﻿int[] numbers = { 42, 17, 8, 99, 23, 4, 65 };
 
-int maxNumber = 2_000_000;
-var numbers = Enumerable.Range(1, maxNumber);
+Console.WriteLine("Initial array:");
+Console.WriteLine(string.Join(", ", numbers));
 
-Stopwatch sw = Stopwatch.StartNew();
-
-int linqCount = numbers
-    .Where(IsPrime)
-    .Count();
-
-sw.Stop();
-long linqTime = sw.ElapsedMilliseconds;
-
-Console.WriteLine($"With LINQ found: {linqCount} | time: {linqTime} ms");
-
-sw.Restart();
-int plinqCount = numbers
-    .AsParallel()
-    .Where(IsPrime)
-    .Count();
-sw.Stop();
-long plinqTime = sw.ElapsedMilliseconds;
-Console.WriteLine($"With PLINQ found: {plinqCount} | time: {plinqTime} ms");
-
-sw.Restart();
-int plinq4Count = numbers
-    .AsParallel()
-    .WithDegreeOfParallelism(4)
-    .Where(IsPrime)
-    .Count();
-sw.Stop();
-long plinq4Time = sw.ElapsedMilliseconds;
-Console.WriteLine($"With PLINQ4 found: {plinq4Count} | time: {plinq4Time} ms");
-
-static bool IsPrime(int number)
+int swapCount = SelectionSortDescending(numbers);
+Console.WriteLine("\nSorted Array:");
+Console.WriteLine(string.Join(", ", numbers));
+Console.WriteLine($"\nNumber of swaps made: {swapCount}.");
+static int SelectionSortDescending(int[] arr)
 {
-    if (number <= 1) return false;
-    if (number == 2) return true;
-    if (number % 2 == 0) return false;
-
-    int boundary = (int)Math.Floor(Math.Sqrt(number));
-
-    for (int i = 3; i <= boundary; i += 2)
+    int swaps = 0;
+    int n = arr.Length;
+    for (int i = 0; i < n - 1; i++)
     {
-        if (number % i == 0)
-            return false;
+        int maxIndex = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (arr[j] > arr[maxIndex])
+            {
+                maxIndex = j;
+            }
+        }
+        if (maxIndex != i)
+        {
+            int temp = arr[i];
+            arr[i] = arr[maxIndex];
+            arr[maxIndex] = temp;
+            swaps++;
+        }
     }
-
-    return true;
+    return swaps;
 }
