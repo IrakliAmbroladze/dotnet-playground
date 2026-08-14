@@ -1,33 +1,67 @@
-﻿int[] numbers = { 42, 17, 8, 99, 23, 4, 65 };
+﻿using System.Diagnostics;
 
-Console.WriteLine("Initial array:");
-Console.WriteLine(string.Join(", ", numbers));
+int size = 100_000;
+int[] originalArray = new int[size];
+Random rand = new Random();
 
-int swapCount = SelectionSortDescending(numbers);
-Console.WriteLine("\nSorted Array:");
-Console.WriteLine(string.Join(", ", numbers));
-Console.WriteLine($"\nNumber of swaps made: {swapCount}.");
-static int SelectionSortDescending(int[] arr)
+for (int i = 0; i < size; i++)
 {
-    int swaps = 0;
-    int n = arr.Length;
-    for (int i = 0; i < n - 1; i++)
+    originalArray[i] = rand.Next(1, 1_000_000);
+}
+int target = originalArray[size / 2];
+Console.WriteLine($"Searching for target: {target} in an array of {size:N0} elements.\n");
+
+Stopwatch sw = Stopwatch.StartNew();
+
+int linearIndex = LinearSearch(originalArray, target);
+sw.Stop();
+long linearTicks = sw.ElapsedTicks;
+
+Console.WriteLine($"[Linear Search]");
+Console.WriteLine($"Index Found : {linearIndex}");
+Console.WriteLine($"Time Taken  : {linearTicks} ticks ({sw.Elapsed.TotalMicroseconds:F2} μs)\n");
+
+int[] sortedArray = (int[])originalArray.Clone();
+Array.Sort(sortedArray);
+
+sw.Restart();
+
+int binaryIndex = BinarySearchManual(sortedArray, target);
+sw.Stop();
+long binaryTicks = sw.ElapsedTicks;
+Console.WriteLine($"[Binary Search (Manual)]");
+Console.WriteLine($"Index Found : {binaryIndex} (in sorted array)");
+Console.WriteLine($"Time Taken  : {binaryTicks} ticks ({sw.Elapsed.TotalMicroseconds:F2} μs)\n");
+
+Console.WriteLine($"Binary Search was approx. {(double)linearTicks / Math.Max(binaryTicks, 1):F1}x faster for the search phase.");
+
+static int LinearSearch(int[] arr, int target)
+{
+    for (int i = 0; i < arr.Length; i++)
     {
-        int maxIndex = i;
-        for (int j = i + 1; j < n; j++)
-        {
-            if (arr[j] > arr[maxIndex])
-            {
-                maxIndex = j;
-            }
-        }
-        if (maxIndex != i)
-        {
-            int temp = arr[i];
-            arr[i] = arr[maxIndex];
-            arr[maxIndex] = temp;
-            swaps++;
-        }
+        if (arr[i] == target)
+            return i;
     }
-    return swaps;
+    return -1;
+}
+
+static int BinarySearchManual(int[] sortedArr, int target)
+{
+    int left = 0;
+    int right = sortedArr.Length - 1;
+
+    while (left <= right)
+    {
+        int mid = left + (right - left) / 2;
+
+        if (sortedArr[mid] == target)
+            return mid;
+
+        if (sortedArr[mid] < target)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
+
+    return -1;
 }
