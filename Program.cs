@@ -1,23 +1,37 @@
-﻿string string1 = "Irakli is a student";
-string string2 = "abba";
-string string3 = "abaa";
-Console.WriteLine(string1.IsPalindrome() ? $"'{string1}' is Palindrome" : $"'{string1}' is not Palindrome");
-Console.WriteLine(string2.IsPalindrome() ? $"'{string2}' is Palindrome" : $"'{string2}' is not Palindrome");
-Console.WriteLine(string3.IsPalindrome() ? $"'{string3}' is Palindrome" : $"'{string3}' is not Palindrome");
+﻿using System.Diagnostics;
 
-static class StringExtension
+static async Task<string> DownloadFileAsync(string fileName, int delayMs)
 {
-    public static bool IsPalindrome(this string text)
+    await Task.Delay(delayMs);
+
+    Random rnd = new Random();
+    if (rnd.Next(1, 101) <= 30)
     {
-        for (int i = 0; i < text.Length; i++)
-        {
-            char left = text[i];
-            char right = text[text.Length - 1 - i];
-
-            if (left != right)
-                return false;
-        }
-
-        return true;
+        throw new Exception("Network error");
     }
+    return $"{fileName} is downloaded";
+}
+
+Stopwatch stopwatch = Stopwatch.StartNew();
+try
+{
+    string[] results = await Task.WhenAll(
+           DownloadFileAsync("First file", 1000),
+           DownloadFileAsync("Second file", 2000),
+           DownloadFileAsync("Third file", 1500)
+       );
+    foreach (string result in results)
+    {
+        Console.WriteLine(result);
+    }
+}
+catch (Exception e)
+{
+    Console.WriteLine($"Exception happened: {e.Message}");
+}
+finally
+{
+    stopwatch.Stop();
+    Console.WriteLine($"Whole process took time of {stopwatch.ElapsedMilliseconds} ms");
+
 }
