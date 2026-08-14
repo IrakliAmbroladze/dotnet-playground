@@ -1,67 +1,31 @@
-﻿using System.Diagnostics;
+﻿Console.WriteLine("Recursive Power");
+Console.WriteLine($"2^10  = {Power(2, 10)}");
+Console.WriteLine($"5^3   = {Power(5, 3)}");
+Console.WriteLine($"7^0   = {Power(7, 0)}");
+Console.WriteLine($"3^4   = {Power(3, 4)}");
 
-int size = 100_000;
-int[] originalArray = new int[size];
-Random rand = new Random();
+Console.WriteLine();
 
-for (int i = 0; i < size; i++)
+Console.WriteLine("Recursive GCD");
+Console.WriteLine($"GCD(48, 18)  = {Gcd(48, 18)}");
+Console.WriteLine($"GCD(101, 10)  = {Gcd(101, 10)}");
+Console.WriteLine($"GCD(56, 98)   = {Gcd(56, 98)}");
+Console.WriteLine($"GCD(270, 192) = {Gcd(270, 192)}");
+
+static long Power(int baseNum, int exponent)
 {
-    originalArray[i] = rand.Next(1, 1_000_000);
-}
-int target = originalArray[size / 2];
-Console.WriteLine($"Searching for target: {target} in an array of {size:N0} elements.\n");
-
-Stopwatch sw = Stopwatch.StartNew();
-
-int linearIndex = LinearSearch(originalArray, target);
-sw.Stop();
-long linearTicks = sw.ElapsedTicks;
-
-Console.WriteLine($"[Linear Search]");
-Console.WriteLine($"Index Found : {linearIndex}");
-Console.WriteLine($"Time Taken  : {linearTicks} ticks ({sw.Elapsed.TotalMicroseconds:F2} μs)\n");
-
-int[] sortedArray = (int[])originalArray.Clone();
-Array.Sort(sortedArray);
-
-sw.Restart();
-
-int binaryIndex = BinarySearchManual(sortedArray, target);
-sw.Stop();
-long binaryTicks = sw.ElapsedTicks;
-Console.WriteLine($"[Binary Search (Manual)]");
-Console.WriteLine($"Index Found : {binaryIndex} (in sorted array)");
-Console.WriteLine($"Time Taken  : {binaryTicks} ticks ({sw.Elapsed.TotalMicroseconds:F2} μs)\n");
-
-Console.WriteLine($"Binary Search was approx. {(double)linearTicks / Math.Max(binaryTicks, 1):F1}x faster for the search phase.");
-
-static int LinearSearch(int[] arr, int target)
-{
-    for (int i = 0; i < arr.Length; i++)
-    {
-        if (arr[i] == target)
-            return i;
-    }
-    return -1;
+    if (exponent < 0)
+        throw new ArgumentException("Exponent must be non-negative.");
+    if (exponent == 0)
+        return 1;
+    return baseNum * Power(baseNum, exponent - 1);
 }
 
-static int BinarySearchManual(int[] sortedArr, int target)
+static int Gcd(int a, int b)
 {
-    int left = 0;
-    int right = sortedArr.Length - 1;
-
-    while (left <= right)
-    {
-        int mid = left + (right - left) / 2;
-
-        if (sortedArr[mid] == target)
-            return mid;
-
-        if (sortedArr[mid] < target)
-            left = mid + 1;
-        else
-            right = mid - 1;
-    }
-
-    return -1;
+    a = Math.Abs(a);
+    b = Math.Abs(b);
+    if (b == 0)
+        return a;
+    return Gcd(b, a % b);
 }
