@@ -1,36 +1,30 @@
-﻿int a = 42; int b = 17; int c = 99; int d = 8;
-Console.WriteLine($"Initial numbers: {a}, {b}, {c}, {d}\n");
-int min, max;
-if (a <= b && a <= c && a <= d)
-    min = a;
-else if (b <= c && b <= d)
-    min = b;
-else if (c <= d)
-    min = c;
+﻿double a = 5;
+double b = 5;
+double c = 8;
+
+Console.WriteLine($"sides: a = {a}, b = {b}, c = {c}\n");
+
+if (a + b > c && a + c > b && b + c > a)
+{
+    Console.WriteLine("A triangle does exist");
+
+    if (a == b && b == c)
+    {
+        Console.WriteLine("type: Equilateral(tolgverda)");
+    }
+    else if (a == b || a == c || b == c)
+    {
+        Console.WriteLine("type: Isosceles(tolgverda)");
+    }
+    else
+    {
+        Console.WriteLine("type: sides are different");
+    }
+
+    double perimeter = a + b + c;
+    Console.WriteLine($"Perimeter: {perimeter}");
+}
 else
-    min = d;
-
-if (a >= b && a >= c && a >= d)
-    max = a;
-else if (b >= c && b >= d)
-    max = b;
-else if (c >= d)
-    max = c;
-else
-    max = d;
-
-Console.WriteLine($"Maximum: {max}");
-Console.WriteLine($"Minimum:  {min}\n");
-
-int n1 = a, n2 = b, n3 = c, n4 = d;
-
-if (n1 > n2) { int temp = n1; n1 = n2; n2 = temp; }
-if (n2 > n3) { int temp = n2; n2 = n3; n3 = temp; }
-if (n3 > n4) { int temp = n3; n3 = n4; n4 = temp; }
-
-if (n1 > n2) { int temp = n1; n1 = n2; n2 = temp; }
-if (n2 > n3) { int temp = n2; n2 = n3; n3 = temp; }
-
-if (n1 > n2) { int temp = n1; n1 = n2; n2 = temp; }
-
-Console.WriteLine($"Sorted: {n1}, {n2}, {n3}, {n4}");
+{
+    Console.WriteLine("A triangle does not exist");
+}
