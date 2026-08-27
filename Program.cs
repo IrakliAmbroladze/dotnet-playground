@@ -1,77 +1,34 @@
-﻿using System.Diagnostics;
-
-class Program
+﻿class Program
 {
-    const long Start = 1;
-    const long End = 100_000_000;
-
-    static long CalculateSum(long start, long end)
+    static void Main()
     {
-        long sum = 0;
-
-        for (long i = start; i <= end; i++)
+        while (true)
         {
-            sum += i;
-        }
+            int inp = int.Parse(Console.ReadLine());
+            if (inp < 0)
+            {
+                inp = -inp;
+            }
+            int tempor = inp;
+            int even = 0;
+            int odd = 0;
 
-        return sum;
-    }
+            while (tempor > 0)
+            {
+                int digit = tempor % 10;
 
-    static async Task Main()
-    {
-        Stopwatch stopwatch = Stopwatch.StartNew();
+                if (digit % 2 == 0)
+                    even++;
 
-        long sequentialSum = CalculateSum(Start, End);
+                if (digit % 2 != 0)
+                    odd++;
 
-        stopwatch.Stop();
 
-        Console.WriteLine($"Sequential sum: {sequentialSum}");
-        Console.WriteLine($"Sequential time: {stopwatch.ElapsedMilliseconds} ms");
+                tempor /= 10;
+            }
 
-        long rangeSize = (End - Start + 1) / 4;
-        stopwatch.Restart();
-
-        Task<long>[] tasks =
-        {
-            Task.Run(() => CalculateSum(Start, Start + rangeSize - 1)),
-
-            Task.Run(() => CalculateSum(
-                Start + rangeSize,
-                Start + rangeSize * 2 - 1)),
-
-            Task.Run(() => CalculateSum(
-                Start + rangeSize * 2,
-                Start + rangeSize * 3 - 1)),
-
-            Task.Run(() => CalculateSum(
-                Start + rangeSize * 3,
-                End))
-        };
-
-        long[] partialSums = await Task.WhenAll(tasks);
-
-        stopwatch.Stop();
-
-        for (int i = 0; i < partialSums.Length; i++)
-        {
-            Console.WriteLine($"Task {i + 1} partial sum: {partialSums[i]}");
-        }
-
-        long parallelSum = partialSums.Sum();
-
-        Console.WriteLine($"Parallel total sum: {parallelSum}");
-        Console.WriteLine($"Parallel time: {stopwatch.ElapsedMilliseconds} ms");
-
-        Console.WriteLine();
-        Console.WriteLine("Comparison:");
-
-        if (parallelSum == sequentialSum)
-        {
-            Console.WriteLine("Results are equal.");
-        }
-        else
-        {
-            Console.WriteLine("Results are different!");
+            Console.WriteLine($"even: {even}");
+            Console.WriteLine($"odd: {odd}");
         }
     }
 }
