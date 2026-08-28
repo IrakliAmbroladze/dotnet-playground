@@ -1,88 +1,23 @@
-﻿var tree = new BST();
+﻿int[] arr = { 2, 5, 7, 8, 4 };
+string[] names = { "Girogi", "Dato", "Anna", "Tornike", "Teona" };
 
-Console.Write("Enter number of values: ");
-int n = int.Parse(Console.ReadLine());
+Resize(ref arr, 10);
+Resize(ref names, 3);
 
-for (int i = 0; i < n; i++)
+Console.WriteLine(string.Join(", ", arr));
+Console.WriteLine(string.Join(", ", names));
+
+
+static void Resize<T>(ref T[] array, int newSize)
 {
-    Console.Write($"Enter value {i + 1}: ");
-    int value = int.Parse(Console.ReadLine());
-    tree.Insert(value);
-}
+    T[] newArray = new T[newSize];
 
-Console.WriteLine("Inorder traversal:");
-tree.InorderTraversal();
+    int elementsToCopy = Math.Min(array.Length, newSize);
 
-Console.Write("Enter a value to search: ");
-int searchValue = int.Parse(Console.ReadLine());
-
-Console.WriteLine($"Exists {searchValue}? " + tree.Search(searchValue));
-
-
-class Node
-{
-    public int Value;
-    public Node Left, Right;
-
-    public Node(int value)
+    for (int i = 0; i < elementsToCopy; i++)
     {
-        Value = value;
-    }
-}
-
-class BST
-{
-    private Node root;
-
-    public void Insert(int value)
-    {
-        root = InsertRec(root, value);
+        newArray[i] = array[i];
     }
 
-    private Node InsertRec(Node node, int value)
-    {
-        if (node == null)
-            return new Node(value);
-
-        if (value < node.Value)
-            node.Left = InsertRec(node.Left, value);
-        else if (value > node.Value)
-            node.Right = InsertRec(node.Right, value);
-
-        return node;
-    }
-
-    public bool Search(int value)
-    {
-        return SearchRec(root, value);
-    }
-
-    private bool SearchRec(Node node, int value)
-    {
-        if (node == null)
-            return false;
-
-        if (node.Value == value)
-            return true;
-
-        return value < node.Value
-            ? SearchRec(node.Left, value)
-            : SearchRec(node.Right, value);
-    }
-
-    public void InorderTraversal()
-    {
-        InorderRec(root);
-        Console.WriteLine();
-    }
-
-    private void InorderRec(Node node)
-    {
-        if (node != null)
-        {
-            InorderRec(node.Left);
-            Console.Write(node.Value + " ");
-            InorderRec(node.Right);
-        }
-    }
+    array = newArray;
 }
