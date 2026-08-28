@@ -1,49 +1,88 @@
-﻿Console.Write("Please enter the length of array: ");
-int input = int.Parse(Console.ReadLine());
-int[] arr = new int[input];
-for (int i = 0; i < arr.Length; i++)
+﻿var tree = new BST();
+
+Console.Write("Enter number of values: ");
+int n = int.Parse(Console.ReadLine());
+
+for (int i = 0; i < n; i++)
 {
-    Console.Write($"Please enter integer for index {i}: ");
-    int arrInput = int.Parse(Console.ReadLine());
-    arr[i] = arrInput;
+    Console.Write($"Enter value {i + 1}: ");
+    int value = int.Parse(Console.ReadLine());
+    tree.Insert(value);
 }
-Console.WriteLine("Your created array is: ");
-Console.WriteLine(string.Join(", ", arr));
 
-MergeSort(arr, 0, arr.Length - 1);
-Console.WriteLine("Sorted array is: ");
-Console.WriteLine(string.Join(", ", arr));
+Console.WriteLine("Inorder traversal:");
+tree.InorderTraversal();
+
+Console.Write("Enter a value to search: ");
+int searchValue = int.Parse(Console.ReadLine());
+
+Console.WriteLine($"Exists {searchValue}? " + tree.Search(searchValue));
 
 
-static void MergeSort(int[] arr, int left, int right)
+class Node
 {
-    if (left < right)
+    public int Value;
+    public Node Left, Right;
+
+    public Node(int value)
     {
-        int mid = (left + right) / 2;
-        MergeSort(arr, left, mid);
-        MergeSort(arr, mid + 1, right);
-        Merge(arr, left, mid, right);
+        Value = value;
     }
 }
 
-static void Merge(int[] arr, int left, int mid, int right)
+class BST
 {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    private Node root;
 
-    int[] L = new int[n1];
-    int[] R = new int[n2];
-
-    Array.Copy(arr, left, L, 0, n1);
-    Array.Copy(arr, mid + 1, R, 0, n2);
-
-    int i = 0, j = 0, k = left;
-
-    while (i < n1 && j < n2)
+    public void Insert(int value)
     {
-        if (L[i] <= R[j]) arr[k++] = L[i++];
-        else arr[k++] = R[j++];
+        root = InsertRec(root, value);
     }
-    while (i < n1) arr[k++] = L[i++];
-    while (j < n2) arr[k++] = R[j++];
+
+    private Node InsertRec(Node node, int value)
+    {
+        if (node == null)
+            return new Node(value);
+
+        if (value < node.Value)
+            node.Left = InsertRec(node.Left, value);
+        else if (value > node.Value)
+            node.Right = InsertRec(node.Right, value);
+
+        return node;
+    }
+
+    public bool Search(int value)
+    {
+        return SearchRec(root, value);
+    }
+
+    private bool SearchRec(Node node, int value)
+    {
+        if (node == null)
+            return false;
+
+        if (node.Value == value)
+            return true;
+
+        return value < node.Value
+            ? SearchRec(node.Left, value)
+            : SearchRec(node.Right, value);
+    }
+
+    public void InorderTraversal()
+    {
+        InorderRec(root);
+        Console.WriteLine();
+    }
+
+    private void InorderRec(Node node)
+    {
+        if (node != null)
+        {
+            InorderRec(node.Left);
+            Console.Write(node.Value + " ");
+            InorderRec(node.Right);
+        }
+    }
 }
