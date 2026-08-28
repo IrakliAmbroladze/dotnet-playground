@@ -1,23 +1,14 @@
-﻿int[] arr = { 2, 5, 7, 8, 4 };
-string[] names = { "Girogi", "Dato", "Anna", "Tornike", "Teona" };
+﻿int[] arr = { 5, 8, 2, 10, 4 };
 
-Resize(ref arr, 10);
-Resize(ref names, 3);
+int sum = Sum(arr, 0);
 
-Console.WriteLine(string.Join(", ", arr));
-Console.WriteLine(string.Join(", ", names));
+Console.WriteLine($"Sum: {sum}");
 
 
-static void Resize<T>(ref T[] array, int newSize)
+static int Sum(int[] array, int index)
 {
-    T[] newArray = new T[newSize];
+    if (index == array.Length)
+        return 0;
 
-    int elementsToCopy = Math.Min(array.Length, newSize);
-
-    for (int i = 0; i < elementsToCopy; i++)
-    {
-        newArray[i] = array[i];
-    }
-
-    array = newArray;
+    return array[index] + Sum(array, index + 1);
 }
