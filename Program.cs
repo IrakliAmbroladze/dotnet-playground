@@ -1,7 +1,12 @@
 ﻿int[] arr = { 4, 5, 7, 2 };
 PrintArray(arr);
-AddAtIndex(ref arr, 12, 3);
+AddFirst(ref arr, 15);
 PrintArray(arr);
+
+static void AddFirst<T>(ref T[] arr, T value)
+{
+    AddAtIndex(ref arr, value, 0);
+}
 static void AddAtIndex<T>(ref T[] array, T value, int index)
 {
     if (index < 0 || index > array.Length)
