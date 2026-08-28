@@ -1,8 +1,12 @@
 ﻿int[] arr = { 4, 5, 7, 2 };
 PrintArray(arr);
-AddFirst(ref arr, 15);
+AddLast(ref arr, 15);
 PrintArray(arr);
 
+static void AddLast<T>(ref T[] arr, T value)
+{
+    AddAtIndex(ref arr, value, arr.Length);
+}
 static void AddFirst<T>(ref T[] arr, T value)
 {
     AddAtIndex(ref arr, value, 0);
