@@ -1,18 +1,24 @@
-﻿Console.Write("Enter a text: ");
-string text = Console.ReadLine() ?? "";
+﻿int[] first = { 5, 2, 8, 1 };
+int[] second = { 7, 3, 6, 4 };
 
-string result = EvenChars(text);
+int[] result = new int[first.Length + second.Length];
 
-Console.WriteLine($"Result: {result}");
-
-static string EvenChars(string s)
+for (int i = 0; i < first.Length; i++)
 {
-    string result = "";
-
-    for (int i = 0; i < s.Length; i += 2)
-    {
-        result += s[i];
-    }
-
-    return result;
+    result[i] = first[i];
 }
+
+for (int i = 0; i < second.Length; i++)
+{
+    result[first.Length + i] = second[i];
+}
+
+Array.Sort(result);
+
+Console.WriteLine("Merged and sorted array:");
+
+foreach (int number in result)
+{
+    Console.Write($"{number} ");
+}
+Console.WriteLine();
