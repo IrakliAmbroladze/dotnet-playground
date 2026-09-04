@@ -1,16 +1,25 @@
-﻿int[] numbers = { 15, 4, 27, 8, 2, 19 };
+﻿Console.Write("Enter a text: ");
+string text = Console.ReadLine() ?? "";
 
-int min = numbers[0];
-int max = numbers[0];
+int result = CountVowels(text);
 
-for (int i = 1; i < numbers.Length; i++)
+Console.WriteLine($"Result: {result}");
+
+static int CountVowels(string s)
 {
-    if (numbers[i] < min)
-        min = numbers[i];
+    int count = 0;
 
-    if (numbers[i] > max)
-        max = numbers[i];
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (
+            s[i] == 'a' ||
+            s[i] == 'e' ||
+            s[i] == 'i' ||
+            s[i] == 'o' ||
+            s[i] == 'u'
+        )
+            count++;
+    }
+
+    return count * 2;
 }
-
-Console.WriteLine($"Minimum: {min}");
-Console.WriteLine($"Maximum: {max}");
