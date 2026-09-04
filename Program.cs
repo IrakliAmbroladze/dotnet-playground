@@ -1,40 +1,42 @@
-﻿using System.Globalization;
-
-Console.Write("Enter a positive integer: ");
-int number = int.Parse(Console.ReadLine() ?? "0", CultureInfo.InvariantCulture);
-
-int originalNumber = number;
-int digitCount = 0;
-int temp = number;
-
-while (temp > 0)
+﻿int n = 8;
+int[] numbers = new int[n];
+Console.WriteLine("Enter 8 integers:");
+for (int i = 0; i < n; i++)
 {
-    digitCount++;
-    temp /= 10;
+    Console.Write($" [{i + 1}]: ");
+    numbers[i] = int.Parse(Console.ReadLine() ?? "0");
 }
-
-temp = number;
-int sum = 0;
-
-Console.WriteLine("\nDigits:");
-
-while (temp > 0)
+int maxCount = 0;
+for (int i = 0; i < n; i++)
 {
-    int digit = temp % 10;
+    int count = 0;
 
-    int power = (int)Math.Pow(digit, digitCount);
-    sum += power;
-
-    Console.WriteLine($"{digit}^{digitCount} = {power}");
-
-    temp /= 10;
+    for (int j = 0; j < n; j++)
+    {
+        if (numbers[i] == numbers[j]) count++;
+    }
+    if (count > maxCount) maxCount = count;
 }
+Console.Write("Most frequent number(s): ");
+for (int i = 0; i < n; i++)
+{
+    int count = 0;
+    for (int j = 0; j < n; j++)
+    {
+        if (numbers[i] == numbers[j]) count++;
+    }
+    bool alreadyPrinted = false;
+    for (int j = 0; j < i; j++)
+    {
+        if (numbers[i] == numbers[j])
+        {
+            alreadyPrinted = true;
+            break;
+        }
+    }
+    if (count == maxCount && !alreadyPrinted) Console.Write($"{numbers[i]} ");
+}
+HashSet<int> uniqueNumbers = new HashSet<int>(numbers);
 Console.WriteLine();
-if (sum == originalNumber)
-{
-    Console.WriteLine($"{originalNumber} is an Armstrong number.");
-}
-else
-{
-    Console.WriteLine($"{originalNumber} is not an Armstrong number.");
-}
+Console.WriteLine($"Maximum frequency: {maxCount}");
+Console.WriteLine($"Unique numbers: {uniqueNumbers.Count}");
