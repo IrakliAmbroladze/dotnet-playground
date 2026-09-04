@@ -1,24 +1,16 @@
-﻿int[] first = { 5, 2, 8, 1 };
-int[] second = { 7, 3, 6, 4 };
+﻿int[] numbers = { 15, 4, 27, 8, 2, 19 };
 
-int[] result = new int[first.Length + second.Length];
+int min = numbers[0];
+int max = numbers[0];
 
-for (int i = 0; i < first.Length; i++)
+for (int i = 1; i < numbers.Length; i++)
 {
-    result[i] = first[i];
+    if (numbers[i] < min)
+        min = numbers[i];
+
+    if (numbers[i] > max)
+        max = numbers[i];
 }
 
-for (int i = 0; i < second.Length; i++)
-{
-    result[first.Length + i] = second[i];
-}
-
-Array.Sort(result);
-
-Console.WriteLine("Merged and sorted array:");
-
-foreach (int number in result)
-{
-    Console.Write($"{number} ");
-}
-Console.WriteLine();
+Console.WriteLine($"Minimum: {min}");
+Console.WriteLine($"Maximum: {max}");
