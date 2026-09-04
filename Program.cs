@@ -1,57 +1,49 @@
-﻿Book Iliad = new Book("1234567891011", "Iliad", 35);
-Book Odyssey = new Book("1234567891012", "Odyssey", 55);
-Reader reader = new Reader("Irakli Ambroladze", "60001111111", Odyssey);
-Console.WriteLine($"Reader is: {reader.Name}");
-string selectedBook = reader.ChosenBook?.Title ?? "Book is not selected";
-Console.WriteLine($"Chosen book: {selectedBook}");
-class Book
-{
-    private string isbn = string.Empty;
-    private string title = string.Empty;
-    private decimal price = 0;
-    public string ISBN
-    {
-        get { return isbn; }
-        set
-        {
-            isbn = value?.Length == 13
-                ? value
-                : string.Empty;
-        }
-    }
-    public string Title
-    {
-        get { return title; }
-        set
-        {
-            title = value ?? string.Empty;
-        }
-    }
-    public decimal Price
-    {
-        get { return price; }
-        set
-        {
-            price = value < 0 ? 0 : value;
-        }
-    }
-    public Book(string isbn, string title, decimal price)
-    {
-        ISBN = isbn;
-        Title = title;
-        Price = price;
-    }
-}
-class Reader
-{
-    public string Name { get; set; }
-    public string PID { get; set; }
-    public Book? ChosenBook { get; set; }
+﻿using System.Globalization;
 
-    public Reader(string name, string id, Book? book)
-    {
-        Name = name;
-        PID = id;
-        ChosenBook = book;
-    }
+int[] numbers = new int[7];
+Console.WriteLine("Enter 7 integers");
+for (int i = 0; i < numbers.Length; i++)
+{
+    Console.Write($" [{i + 1}]: ");
+    numbers[i] = int.Parse(Console.ReadLine() ?? "0", CultureInfo.InvariantCulture);
 }
+int even = 0;
+int sumOfEvens = 0;
+int odd = 0;
+int sumOfOdds = 0;
+int sum = 0;
+double median = 0;
+
+foreach (int n in numbers)
+{
+    if (n % 2 == 0)
+    {
+        sumOfEvens += n;
+        even++;
+    }
+
+    if (n % 2 != 0)
+    {
+        sumOfOdds += n;
+        odd++;
+    }
+
+    sum += n;
+}
+
+Array.Sort(numbers);
+Array.Reverse(numbers);
+
+if (numbers.Length % 2 == 1)
+    median = numbers[numbers.Length / 2];
+else
+    median = (numbers[numbers.Length / 2 - 1] + numbers[numbers.Length / 2]) / 2.0;
+
+Console.WriteLine($"even: {even}");
+Console.WriteLine($"sumOfEvens: {sumOfEvens}");
+Console.WriteLine($"odd: {odd}");
+Console.WriteLine($"sumOfOdds: {sumOfOdds}");
+Console.WriteLine($"sum: {sum}");
+
+Console.WriteLine($"Sorted: {string.Join(", ", numbers)}");
+Console.WriteLine($"median: {median}");
