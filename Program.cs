@@ -1,42 +1,19 @@
-﻿int n = 8;
-int[] numbers = new int[n];
-Console.WriteLine("Enter 8 integers:");
-for (int i = 0; i < n; i++)
-{
-    Console.Write($" [{i + 1}]: ");
-    numbers[i] = int.Parse(Console.ReadLine() ?? "0");
-}
-int maxCount = 0;
-for (int i = 0; i < n; i++)
-{
-    int count = 0;
+﻿Console.Write("Enter a number: ");
+int n = int.Parse(Console.ReadLine() ?? "0");
 
-    for (int j = 0; j < n; j++)
-    {
-        if (numbers[i] == numbers[j]) count++;
-    }
-    if (count > maxCount) maxCount = count;
-}
-Console.Write("Most frequent number(s): ");
-for (int i = 0; i < n; i++)
+PrintSquareTable(n);
+
+static void PrintSquareTable(int n)
 {
-    int count = 0;
-    for (int j = 0; j < n; j++)
+    Console.WriteLine();
+    Console.WriteLine($"{"Number",-10} {"Square",-10} {"Cube",-10}");
+    Console.WriteLine("------------------------------");
+
+    for (int i = 1; i <= n; i++)
     {
-        if (numbers[i] == numbers[j]) count++;
+        int square = i * i;
+        int cube = i * i * i;
+
+        Console.WriteLine($"{i,-10} {square,-10} {cube,-10}");
     }
-    bool alreadyPrinted = false;
-    for (int j = 0; j < i; j++)
-    {
-        if (numbers[i] == numbers[j])
-        {
-            alreadyPrinted = true;
-            break;
-        }
-    }
-    if (count == maxCount && !alreadyPrinted) Console.Write($"{numbers[i]} ");
 }
-HashSet<int> uniqueNumbers = new HashSet<int>(numbers);
-Console.WriteLine();
-Console.WriteLine($"Maximum frequency: {maxCount}");
-Console.WriteLine($"Unique numbers: {uniqueNumbers.Count}");
