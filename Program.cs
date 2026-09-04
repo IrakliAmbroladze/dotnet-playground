@@ -1,37 +1,57 @@
-﻿int[] arr = { 4, 5, 7, 2 };
-PrintArray(arr);
-AddLast(ref arr, 15);
-PrintArray(arr);
-
-static void AddLast<T>(ref T[] arr, T value)
+﻿Book Iliad = new Book("1234567891011", "Iliad", 35);
+Book Odyssey = new Book("1234567891012", "Odyssey", 55);
+Reader reader = new Reader("Irakli Ambroladze", "60001111111", Odyssey);
+Console.WriteLine($"Reader is: {reader.Name}");
+string selectedBook = reader.ChosenBook?.Title ?? "Book is not selected";
+Console.WriteLine($"Chosen book: {selectedBook}");
+class Book
 {
-    AddAtIndex(ref arr, value, arr.Length);
-}
-static void AddFirst<T>(ref T[] arr, T value)
-{
-    AddAtIndex(ref arr, value, 0);
-}
-static void AddAtIndex<T>(ref T[] array, T value, int index)
-{
-    if (index < 0 || index > array.Length)
+    private string isbn = string.Empty;
+    private string title = string.Empty;
+    private decimal price = 0;
+    public string ISBN
     {
-        Console.WriteLine("Invalid index!");
-        return;
+        get { return isbn; }
+        set
+        {
+            isbn = value?.Length == 13
+                ? value
+                : string.Empty;
+        }
     }
-    T[] newArray = new T[array.Length + 1];
-    for (int i = 0; i < index; i++)
-        newArray[i] = array[i];
-    newArray[index] = value;
-    for (int i = index; i < array.Length; i++)
-        newArray[i + 1] = array[i];
-    array = newArray;
-}
-static void PrintArray<T>(T[] array)
-{
-    for (int i = 0; i < array.Length; i++)
+    public string Title
     {
-        Console.WriteLine(array[i]);
+        get { return title; }
+        set
+        {
+            title = value ?? string.Empty;
+        }
     }
+    public decimal Price
+    {
+        get { return price; }
+        set
+        {
+            price = value < 0 ? 0 : value;
+        }
+    }
+    public Book(string isbn, string title, decimal price)
+    {
+        ISBN = isbn;
+        Title = title;
+        Price = price;
+    }
+}
+class Reader
+{
+    public string Name { get; set; }
+    public string PID { get; set; }
+    public Book? ChosenBook { get; set; }
 
-    Console.WriteLine("________________");
+    public Reader(string name, string id, Book? book)
+    {
+        Name = name;
+        PID = id;
+        ChosenBook = book;
+    }
 }
