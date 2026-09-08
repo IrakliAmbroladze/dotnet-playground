@@ -1,25 +1,29 @@
-﻿Console.Write("Enter a text: ");
-string text = Console.ReadLine() ?? "";
+﻿int a = int.Parse(Console.ReadLine());
+int b = int.Parse(Console.ReadLine());
+int c = int.Parse(Console.ReadLine());
 
-int result = CountVowels(text);
-
-Console.WriteLine($"Result: {result}");
-
-static int CountVowels(string s)
+if (a + b > c)
 {
-    int count = 0;
-
-    for (int i = 0; i < s.Length; i++)
+    if (a + c > b)
     {
-        if (
-            s[i] == 'a' ||
-            s[i] == 'e' ||
-            s[i] == 'i' ||
-            s[i] == 'o' ||
-            s[i] == 'u'
-        )
-            count++;
+        if (b + c > a)
+        {
+            if (a == b && b == c)
+            {
+                Console.WriteLine("tolgverda");
+            }
+            else if (a == b || b == c || a == c)
+            {
+                Console.WriteLine("tolferda");
+            }
+            else
+            {
+                Console.WriteLine("gverdebi sxvadasxva sigrdzisaa");
+            }
+        }
     }
-
-    return count * 2;
+    else
+    {
+        Console.WriteLine("araa samkutxedi");
+    }
 }
