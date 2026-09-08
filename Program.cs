@@ -2,28 +2,53 @@
 int b = int.Parse(Console.ReadLine());
 int c = int.Parse(Console.ReadLine());
 
-if (a + b > c)
+int max = int.MinValue;
+int min = int.MaxValue;
+int middle = 0;
+
+if (a > max)
 {
-    if (a + c > b)
+    max = a;
+    if (b > max)
     {
-        if (b + c > a)
+        max = b;
+        if (c > max)
         {
-            if (a == b && b == c)
-            {
-                Console.WriteLine("tolgverda");
-            }
-            else if (a == b || b == c || a == c)
-            {
-                Console.WriteLine("tolferda");
-            }
-            else
-            {
-                Console.WriteLine("gverdebi sxvadasxva sigrdzisaa");
-            }
+            max = c;
+
         }
     }
-    else
+}
+
+if (a < min)
+{
+    min = a;
+    if (b < min)
     {
-        Console.WriteLine("araa samkutxedi");
+        min = b;
+        if (c < min)
+        {
+            min = c;
+        }
     }
 }
+
+
+if (a > min && max > a)
+{
+    middle = a;
+}
+
+if (b > min && max > b)
+{
+    middle = b;
+
+}
+if (c > min && max > c)
+{
+    middle = c;
+}
+
+Console.WriteLine($"max {max}");
+Console.WriteLine($"min {min}");
+Console.WriteLine($"{min} {middle} {max}");
